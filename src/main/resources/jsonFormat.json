@@ -1,0 +1,33 @@
+{
+  "name": "Denys",
+  "phoneNumber": "+380973999060",
+  "lastName": "Ohorodnik",
+  "address": {
+    "street": "Nebesnoi Sotni ,4B",
+    "city": "Chernivtsi",
+    "zipCode": 58000
+  },
+  "sex": "male",
+  "email": "den.ohorodnik@gmail.com",
+  "dateOfBirth": {
+    "year": 1999,
+    "month": 6,
+    "day": 4
+  },
+  "jobs": [
+    {
+      "companyName": "SoftServe",
+      "startDate": {
+        "year": 2010,
+        "month": 6,
+        "day": 4
+      },
+      "endDate": {
+        "year": 2011,
+        "month": 6,
+        "day": 4
+      },
+      "position": "junior"
+    }
+  ]
+}

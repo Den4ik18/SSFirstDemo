@@ -1,0 +1,195 @@
+package com.model;
+
+
+import com.dateAdapter.MyAdapter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.dateAdapter.LocalDateDeserializer;
+import com.dateAdapter.LocalDateSerializer;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
+
+@XmlRootElement(name = "employee")
+public class Employee {
+    private Long id;
+    private String name;
+    private String phoneNumber;
+//    @XmlElement(name = "lastName")
+    private String lastName;
+    private Address address;
+    private String sex;
+    private String email;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate dateOfBirth;
+
+    private List<Job> jobs = new ArrayList<>();
+
+    public Employee() {
+    }
+
+    public Employee(String name, String lastName, String phoneNumber, Address address, String sex, String email, LocalDate dateOfBirth, List<Job> jobs) {
+        this.name = name;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.sex = sex;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.jobs = jobs;
+    }
+
+    public Employee(String name, String lastName, String phoneNumber, Address address, String sex, String email, List<Job> jobs) {
+        this.name = name;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.sex = sex;
+        this.email = email;
+        this.jobs = jobs;
+    }
+
+    public Employee(Long id, String name, String lastName, String phoneNumber, Address address, String sex, String email, LocalDate dateOfBirth) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.lastName = lastName;
+        this.address = address;
+        this.sex = sex;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Employee(Long id, String name, String lastName, String phoneNumber, Address address, String sex, String email, LocalDate dateOfBirth, List<Job> jobs) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.lastName = lastName;
+        this.address = address;
+        this.sex = sex;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.jobs = jobs;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(name, employee.name) &&
+                Objects.equals(phoneNumber, employee.phoneNumber) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(address, employee.address) &&
+                Objects.equals(sex, employee.sex) &&
+                Objects.equals(email, employee.email) &&
+                Objects.equals(dateOfBirth, employee.dateOfBirth) &&
+                Objects.equals(jobs, employee.jobs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phoneNumber, lastName, address, sex, email, dateOfBirth, jobs);
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
+
+    @XmlJavaTypeAdapter(value = MyAdapter.class)
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address=" + address +
+                ", sex='" + sex + '\'' +
+                ", email='" + email + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", jobs=" + jobs +
+                '}';
+    }
+
+}

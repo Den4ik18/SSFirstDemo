@@ -1,0 +1,13 @@
+name: Vitaliy
+lastName: Bazalyk
+address:
+     city: Chernivtsi
+     street: Nebesnoi Sotni ,4B
+     zipCode: 58000
+companies:
+  - companyName: InventorSoft
+dateOfBirth:
+    1999-03-14
+phoneNumber:
+  - 380925454321
+sex: male

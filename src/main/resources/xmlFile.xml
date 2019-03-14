@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employee>
+   <name>Petro</name>
+   <lastName>Ivanov</lastName>
+   <address>
+      <city>Chernivtsi</city>
+      <street>Holovna ,110</street>
+      <zipCode>58000</zipCode>
+   </address>
+   <jobs>
+      <companyName>SoftServe</companyName>
+      <startDate>2014-10-13</startDate>
+      <endDate>2015-10-13</endDate>
+      <position>junior</position>
+   </jobs>
+   <jobs>
+      <companyName>InventorSoft</companyName>
+      <startDate>2017-10-13</startDate>
+      <endDate>2018-02-13</endDate>
+      <position>junior</position>
+   </jobs>
+   <dateOfBirth>1990-10-05</dateOfBirth>
+   <phoneNumber>+38098443423</phoneNumber>
+   <sex>male</sex>
+   <email>ivanov.pet@gmail.com</email>
+</employee>
