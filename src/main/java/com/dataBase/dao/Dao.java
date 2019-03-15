@@ -13,6 +13,6 @@ public interface Dao<T> {
 
      void add(T ob);
 
-     Long update(T ob);
+     Long update(T ob, Long id);
 
 }
