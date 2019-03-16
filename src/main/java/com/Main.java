@@ -1,21 +1,25 @@
 package com;
 
-import com.service.EmployeeService;
+import com.parser.YamlParser;
+import com.service.ParserService;
 
 import java.io.File;
 import java.time.LocalDate;
 
-
+/**
+ * This class for parsing files.
+ * This class is temporary.
+ * */
 public class Main {
     public static void main(String[] args) {
 
-        EmployeeService employeeService = new EmployeeService();
-        employeeService.searchEmployee(new File("src/main/resources/inputFile.txt"));
+        ParserService parserService = new ParserService();
+        parserService.setEmployees(parserService.searchEmployeeInSingleFile(new File("src/main/resources/inputFile.txt")));
 
-        employeeService.getEmployees().forEach(employee -> employee.getJobs().stream()
+        parserService.getEmployees().forEach(employee -> employee.getJobs().stream()
                 .filter(job -> job.getEndDate() == null)
                 .forEach(job -> job.setEndDate(LocalDate.now())));
 
-        employeeService.exportYamlList("src/main/resources/main.yml", employeeService);
+        YamlParser.exportYamlList("src/main/resources/main.yml", parserService.getEmployees());
     }
 }

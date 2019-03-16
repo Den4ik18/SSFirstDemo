@@ -1,8 +1,8 @@
 ---
-employees:
 - id: 1
   name: "Dmytro"
   phoneNumber: "+38098443423"
+  lastName: "Havrulov"
   address:
     id: null
     street: "Holovna ,110"
@@ -25,6 +25,7 @@ employees:
 - id: 1
   name: "Denys"
   phoneNumber: "+380973999060"
+  lastName: "Ohorodnik"
   address:
     id: null
     street: "Nebesnoi Sotni ,4B"
@@ -42,6 +43,7 @@ employees:
 - id: 3
   name: "Petro"
   phoneNumber: "+38098443423"
+  lastName: "Ivanov"
   address:
     id: 1
     street: "Holovna 220"

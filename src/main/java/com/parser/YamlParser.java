@@ -1,8 +1,10 @@
 package com.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.model.Employee;
+import com.service.ParserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,5 +20,16 @@ public class YamlParser {
             e.printStackTrace();
         }
     }
+    public static String exportYamlList(String fileName, List<Employee> employees) {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        File file = new File(fileName);
+        try {
+            mapper.writeValue(file, employees);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

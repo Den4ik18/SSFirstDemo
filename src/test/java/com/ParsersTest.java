@@ -3,13 +3,12 @@ package com;
 import com.model.Address;
 import com.model.Employee;
 import com.model.Job;
-import com.service.EmployeeService;
+import com.service.ParserService;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,13 +16,13 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.parser.JsonParser.getEmployeeFromJsonFile;
-import static com.parser.JsonParser.getJsonFromEmployee;
+import static com.parser.JsonParser.writeJsonFromEmployee;
 import static com.parser.XmlParser.getEmployeeWithXmlFile;
-import static com.parser.XmlParser.getXmlFileFromEmployee;
+import static com.parser.XmlParser.writeToXmlFileFromEmployee;
 
 public class ParsersTest {
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-    private EmployeeService employeeService;
+    private ParserService parserService;
     private Employee employeeFromTxt;
     private Employee employeeFromJson;
     private Employee employeeFromXml;
@@ -74,21 +73,21 @@ public class ParsersTest {
 
     @Test(dataProvider = "getXmlEmployee")
     public void serializationEmployeeFromXmlFileAndReturnTrueWhenObjectsAreEquals(Employee expectedEmployee) {
-        getXmlFileFromEmployee(expectedEmployee);
+        writeToXmlFileFromEmployee(expectedEmployee);
         Employee employee = getEmployeeWithXmlFile(new File("src/main/resources/xmlFormat.xml"));
         Assert.assertEquals(employee, expectedEmployee);
     }
 
     @Test(dataProvider = "getJsonEmployee")
     public void serializationEmployeeFromJsonFileAndReturnTrueWhenObjectsAreEquals(Employee expectedEmployee) {
-        getJsonFromEmployee(expectedEmployee);
+        writeJsonFromEmployee(expectedEmployee);
         Employee employee = getEmployeeFromJsonFile(new File("src/main/resources/jsonFile.json"));
         Assert.assertEquals(employee, expectedEmployee);
     }
 
     @Test(dataProvider = "getJsonEmployee")
     public void serializationEmployeeAnotherFileAndReturnTrueWhenObjectsAreEquals(Employee expectedEmployee) {
-        getJsonFromEmployee(expectedEmployee);
+        writeJsonFromEmployee(expectedEmployee);
         Employee employee = getEmployeeFromJsonFile(new File("src/main/resources/jsonFile.json"));
         Assert.assertEquals(expectedEmployee, employee);
     }

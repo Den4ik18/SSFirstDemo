@@ -18,7 +18,7 @@ public class JsonParser {
         return gson.fromJson(line, Employee.class);
     }
 
-    public static void getJsonFromEmployee(Employee employee){
+    public static void writeJsonFromEmployee(Employee employee){
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();

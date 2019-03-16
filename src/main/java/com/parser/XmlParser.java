@@ -26,7 +26,7 @@ public class XmlParser {
         return employeeXml;
     }
 
-    public static void getXmlFileFromEmployee(Employee employee) {
+    public static void writeToXmlFileFromEmployee(Employee employee) {
         JAXBContext jaxbContext;
         try {
             jaxbContext = JAXBContext.newInstance(Employee.class);

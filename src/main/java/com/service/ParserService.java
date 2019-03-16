@@ -1,10 +1,5 @@
 package com.service;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.fasterxml.jackson.xml.XmlMapper;
 import com.model.Employee;
 
 import java.io.*;
@@ -18,19 +13,19 @@ import static com.parser.TxtParser.serealizationTxt;
 import static com.parser.XmlParser.getEmployeeFromXmlInputStream;
 
 
-public class EmployeeService {
-    private static List<Employee> employees = new ArrayList<>();
+public class ParserService {
+    private static List<Employee> employeesFromFile = new ArrayList<>();
     private static Employee employeeTxt = new Employee();
 
     public List<Employee> getEmployees() {
-        return employees;
+        return employeesFromFile;
     }
 
     public void setEmployees(List<Employee> employees) {
-        EmployeeService.employees = employees;
+        ParserService.employeesFromFile = employees;
     }
 
-    public void searchEmployee(File fileName) {
+    public List<Employee> searchEmployeeInSingleFile(File fileName) {
         boolean textFlag = false;
         List<String> txt = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
@@ -40,11 +35,11 @@ public class EmployeeService {
                     Employee employeeXml = new Employee();
                     InputStream stream = new ByteArrayInputStream(line.getBytes(StandardCharsets.UTF_8));
                     employeeXml = getEmployeeFromXmlInputStream(stream);
-                    employees.add(employeeXml);
+                    employeesFromFile.add(employeeXml);
                 } else if (line.startsWith("{")) {
                     Employee jsonEmployee = new Employee();
                     jsonEmployee = importJsonFromSingleLine(line);
-                    employees.add(jsonEmployee);
+                    employeesFromFile.add(jsonEmployee);
                 } else {
                     txt.add(line);
                 }
@@ -57,26 +52,9 @@ public class EmployeeService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        employees.add(employeeTxt);
+        employeesFromFile.add(employeeTxt);
+        return employeesFromFile;
     }
-
-
-
-    public String exportYamlList(String fileName, EmployeeService employeeService) {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        File file = new File(fileName);
-        try {
-            mapper.writeValue(file, employeeService);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-
-
-
 }
 
 

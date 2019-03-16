@@ -1,10 +1,10 @@
 package com.model;
 
-import com.dateAdapter.MyAdapter;
+import com.dateadapter.MyAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.dateAdapter.LocalDateDeserializer;
-import com.dateAdapter.LocalDateSerializer;
+import com.dateadapter.LocalDateDeserializer;
+import com.dateadapter.LocalDateSerializer;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -93,7 +93,7 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return id == job.id &&
+        return id.equals(job.id) &&
                 Objects.equals(companyName, job.companyName) &&
                 Objects.equals(startDate, job.startDate) &&
                 Objects.equals(endDate, job.endDate) &&

@@ -1,13 +1,14 @@
-package com.dataBase.dao;
+package com.database.dao;
 
 import com.model.Address;
 import com.model.Employee;
 import com.model.Job;
 
 import java.sql.*;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class EmployeeDao implements Dao<Employee> {
     private static final Connection connection = MySqlConnection.getInstance().getConnection();
@@ -18,6 +19,21 @@ public class EmployeeDao implements Dao<Employee> {
     private static final String SELECT_WITH_CONDITION = "SELECT * FROM employee WHERE employee_id=?";
     private static final String SELECT_ADDRESS = "SELECT street,city,zip_code FROM address WHERE employee_id = ?";
     private static final String SELECT_JOB = "SELECT company_name,start_date,end_date,position FROM job WHERE employee_id = ?";
+    private static final String DELETE_BY_NAME = "DELETE FROM employee WHERE name=?";
+    private static final String EMPLOYEE_ID = "employee_id";
+    private static final String NAME = "name";
+    private static final String LAST_NAME = "last_name";
+    private static final String PHONE_NUMBER = "phone_number";
+    private static final String SEX = "sex";
+    private static final String EMAIL = "email";
+    private static final String DATE_OF_BIRTH = "date_of_birth";
+    private static final String COMPANY_NAME = "company_name";
+    private static final String START_DATE = "start_date";
+    private static final String END_DATE = "end_date";
+    private static final String POSITION = "position";
+    private static final String STREET = "street";
+    private static final String CITY = "city";
+    private static final String ZIP_CODE = "zip_code";
 
     @Override
     public List<Employee> getAll() {
@@ -25,13 +41,13 @@ public class EmployeeDao implements Dao<Employee> {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(SELECT_FROM_EMPLOYEE);
             while (resultSet.next()) {
-                long id = resultSet.getLong("employee_id");
-                String name = resultSet.getString("name");
-                String lastName = resultSet.getString("last_name");
-                String phoneNumber = resultSet.getString("phone_number");
-                String sex = resultSet.getString("sex");
-                String email = resultSet.getString("email");
-                LocalDate dateOfBirth = resultSet.getDate("date_of_birth").toLocalDate();
+                long id = resultSet.getLong(EMPLOYEE_ID);
+                String name = resultSet.getString(NAME);
+                String lastName = resultSet.getString(LAST_NAME);
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String sex = resultSet.getString(SEX);
+                String email = resultSet.getString(EMAIL);
+                LocalDate dateOfBirth = resultSet.getDate(DATE_OF_BIRTH).toLocalDate();
                 Address address = getAddress(id);
                 List<Job> jobs = getJobs(id);
 
@@ -46,35 +62,47 @@ public class EmployeeDao implements Dao<Employee> {
 
 
     @Override
-    public void remove(Long id) {
-        PreparedStatement preparedStatement = null;
+    public boolean remove(Long id) {
         try {
-            preparedStatement = Objects.requireNonNull(connection).prepareStatement(DELETE_FROM_EMPLOYEE);
+            PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(DELETE_FROM_EMPLOYEE);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    public boolean removeByName(String name) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_NAME);
+            preparedStatement.setString(1, name);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public Employee getById(Long id) {
-        PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_WITH_CONDITION);
+            PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_WITH_CONDITION);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Long emloyeeId = resultSet.getLong("employee_id");
-                String name = resultSet.getString("name");
-                String lastName = resultSet.getString("last_name");
-                String sex = resultSet.getString("sex");
-                String phoneNumber = resultSet.getString("phone_number");
-                LocalDate dateOfBirth = resultSet.getDate("date_of_birth").toLocalDate();
-                String email = resultSet.getString("email");
+                Long employeeId = resultSet.getLong(EMPLOYEE_ID);
+                String name = resultSet.getString(NAME);
+                String lastName = resultSet.getString(LAST_NAME);
+                String sex = resultSet.getString(SEX);
+                LocalDate dateOfBirth = resultSet.getDate(DATE_OF_BIRTH).toLocalDate();
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String email = resultSet.getString(EMAIL);
 
-                Address address = getAddress(emloyeeId);
-                List<Job> jobs = getJobs(emloyeeId);
+                Address address = getAddress(employeeId);
+                List<Job> jobs = getJobs(employeeId);
 
                 Employee employee = new Employee();
                 employee.setId(id);
@@ -92,11 +120,10 @@ public class EmployeeDao implements Dao<Employee> {
             e.printStackTrace();
         }
         return null;
-
     }
 
     @Override
-    public void add(Employee employee) {
+    public Employee add(Employee employee) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TO_EMPLOYEE);
             preparedStatement.setString(1, employee.getName());
@@ -106,13 +133,10 @@ public class EmployeeDao implements Dao<Employee> {
             preparedStatement.setString(5, employee.getEmail());
             preparedStatement.setDate(6, Date.valueOf(employee.getDateOfBirth()));
             preparedStatement.executeUpdate();
-           /* LinkedList<Employee> employees = (LinkedList<Employee>) getAll();
-            employees.sort(Comparator.comparing(Employee::getId).reversed());
-
-            employee.setId(employees.getFirst().getId());*/
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return employee;
     }
 
     private PreparedStatement getPreparedStatement(Employee employee, String line) throws SQLException {
@@ -146,9 +170,9 @@ public class EmployeeDao implements Dao<Employee> {
         ResultSet resultSetForAddress = addressPreparedStatement.executeQuery();
         Address address = new Address();
         while (resultSetForAddress.next()) {
-            address.setStreet(resultSetForAddress.getString("street"));
-            address.setCity(resultSetForAddress.getString("city"));
-            address.setZipCode(resultSetForAddress.getInt("zip_code"));
+            address.setStreet(resultSetForAddress.getString(STREET));
+            address.setCity(resultSetForAddress.getString(CITY));
+            address.setZipCode(resultSetForAddress.getInt(ZIP_CODE));
         }
         return address;
     }
@@ -159,8 +183,8 @@ public class EmployeeDao implements Dao<Employee> {
         ResultSet resultSet1 = preparedStatement.executeQuery();
         List<Job> jobs = new ArrayList<>();
         while (resultSet1.next()) {
-            jobs.add(new Job(resultSet1.getString("company_name"), resultSet1.getDate("start_date").toLocalDate(),
-                    resultSet1.getDate("end_date").toLocalDate(), resultSet1.getString("position")));
+            jobs.add(new Job(resultSet1.getString(COMPANY_NAME), resultSet1.getDate(START_DATE).toLocalDate(),
+                    resultSet1.getDate(END_DATE).toLocalDate(), resultSet1.getString(POSITION)));
         }
         return jobs;
     }
