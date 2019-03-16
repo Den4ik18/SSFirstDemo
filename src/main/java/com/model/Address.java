@@ -1,12 +1,28 @@
 package com.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
 
 public class Address {
+    @NotNull(message = "id must be not null")
+    @PositiveOrZero(message = "id must be positive or zero")
     private Long id;
+
+    @NotNull(message = "street must be not null")
+    @NotBlank(message = "street can't be blank")
     private String street;
+
+    @NotNull(message = "city must be not null")
+    @NotBlank(message = "city can't be blank")
     private String city;
+
+    @NotNull(message = "zip code must be not null")
+    @NotBlank(message = "zip code can't be blank")
+    @Pattern(regexp = "^[0-9]{5}(?:-[0-9]{4})?$")
     private int zipCode;
 
     public Address() {

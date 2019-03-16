@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.dateadapter.LocalDateDeserializer;
 import com.dateadapter.LocalDateSerializer;
 
+import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
@@ -13,15 +14,28 @@ import java.util.Objects;
 
 @XmlRootElement(name = "jobs")
 public class Job {
+    @NotNull(message = "id must be not null")
+    @PositiveOrZero(message = "id must be positive or zero")
     private Long id;
+
+    @NotNull(message = "company name must be not null")
+    @NotBlank(message = "company name can't be blank")
     private String companyName;
+
+    @NotNull(message = "start date of work must be not null")
+    @Past(message = "start date of work must be in past")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate startDate;
+
+    @NotNull(message = "end date of work must be not null")
+    @PastOrPresent(message = "end date of work must be in past or present")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate endDate;
 
+    @NotNull(message = "position must be not null")
+    @NotBlank(message = "position can't be blank")
     private String position;
 
     public Job() {

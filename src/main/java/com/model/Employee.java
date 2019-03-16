@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.dateadapter.LocalDateDeserializer;
 import com.dateadapter.LocalDateSerializer;
 
+import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.text.SimpleDateFormat;
@@ -19,18 +20,44 @@ import java.util.Objects;
 
 @XmlRootElement(name = "employee")
 public class Employee {
+    @NotNull(message = "id must be not null")
+    @PositiveOrZero(message = "id must be positive or zero")
     private Long id;
+
+    @NotNull(message = "name must be not null")
+    @NotBlank(message = "name can't be blank")
+    @Pattern(regexp = "^[A-Z]?[a-z]*(?:-[A-Z][a-z]*)?$")
     private String name;
+
+    @NotNull(message = "phone number must be not null")
+    @NotBlank(message = "phone number must be not blank")
+    @Pattern(regexp = "^\\+?\\d{12}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}")
     private String phoneNumber;
-//    @XmlElement(name = "lastName")
+
+    //    @XmlElement(name = "lastName")
+    @NotNull(message = "last name must be not null")
+    @NotBlank(message = "last name can't be blank")
     private String lastName;
+
+    @NotNull(message = "address must be not null")
     private Address address;
+
+    @NotNull(message = "sex must be not null")
+    @NotBlank(message = "sex can't be blank")
     private String sex;
+
+    @NotNull(message = "email must be not null")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+(com|ua|ru|org)$")
     private String email;
+
+    @NotNull(message = "date of birth must be not null")
+    @Past(message = "date of birth must be in past")
+    @Pattern(regexp = "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])*")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateOfBirth;
 
+    @NotNull(message = "job list must be not null")
     private List<Job> jobs = new ArrayList<>();
 
     public Employee() {
