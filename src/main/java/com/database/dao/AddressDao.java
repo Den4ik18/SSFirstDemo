@@ -1,6 +1,8 @@
 package com.database.dao;
 
 import com.model.Address;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AddressDao implements Dao<Address> {
+    private static final Logger logger = LogManager.getLogger(AddressDao.class);
     private static final Connection connection = MySqlConnection.getInstance().getConnection();
     private static final String SELECT_FROM_ADDRESS = "SELECT * FROM address";
     private static final String DELETE_FROM_ADDRESS = "DELETE FROM address WHERE address_id=?";
@@ -34,8 +37,9 @@ public class AddressDao implements Dao<Address> {
                 address.add(new Address(id, street, city, zipCode));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return address");
         return address;
     }
 
@@ -45,10 +49,12 @@ public class AddressDao implements Dao<Address> {
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(DELETE_FROM_ADDRESS);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+            logger.info("Address was deleted from database by id: " + id);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Address wasn't deleted from database: " + id);
         return false;
     }
 
@@ -57,10 +63,12 @@ public class AddressDao implements Dao<Address> {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_ADDRESS_BY_STREET);
             preparedStatement.setString(1, street);
             preparedStatement.executeUpdate();
+            logger.info("Address was deleted from database by street: " + street);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Address wasn't deleted from database: " + street);
         return false;
     }
 
@@ -78,12 +86,11 @@ public class AddressDao implements Dao<Address> {
                 address.setStreet(street);
                 address.setZipCode(zipCode);
                 address.setCity(city);
-                //return address;
-
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return address by id: " + id);
         return address;
     }
 
@@ -92,9 +99,11 @@ public class AddressDao implements Dao<Address> {
         try {
             PreparedStatement preparedStatement = getPreparedStatement(address);
             preparedStatement.executeUpdate();
+            logger.info("Address was address to database");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return address what was added");
         return address;
     }
 
@@ -106,8 +115,9 @@ public class AddressDao implements Dao<Address> {
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setLong(4, employeeId);
             preparedStatement.executeUpdate();
+            logger.info("Address was added for certain employee by id: " + employeeId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -122,9 +132,11 @@ public class AddressDao implements Dao<Address> {
                 preparedStatement.setLong(4, id);
             }
             preparedStatement.executeUpdate();
+            logger.info("Address was updated by id: " + id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return id address what was updated by id: " + id);
         return address.getId();
     }
 

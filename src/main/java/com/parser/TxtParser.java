@@ -3,6 +3,8 @@ package com.parser;
 import com.model.Address;
 import com.model.Employee;
 import com.model.Job;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -11,12 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TxtParser {
+    private final static Logger logger = LogManager.getLogger(TxtParser.class);
+
     public static Employee serealizationTxt(List<String> line) throws ParseException {
         Job job = new Job();
         Employee employeeTxt = new Employee();
         List<Job> jobList = new ArrayList<>();
         for (String word : line) {
-            if (word.startsWith("id")) 
+            if (word.startsWith("id"))
                 employeeTxt.setId(Long.valueOf(word.substring(4)));
             if (word.startsWith("name")) {
                 employeeTxt.setName(word.substring(6));
@@ -38,6 +42,7 @@ public class TxtParser {
                     }
                 }
                 employeeTxt.setAddress(address);
+                logger.info("Address was received");
             } else if (word.startsWith("sex")) {
                 employeeTxt.setSex(word.substring(5));
             } else if (word.startsWith("date")) {
@@ -64,8 +69,10 @@ public class TxtParser {
                 }
                 jobList.add(job);
                 employeeTxt.setJobs(jobList);
+                logger.info("Jobs were received");
             }
         }
+        logger.info("Return employee from txt format");
         return employeeTxt;
     }
 }

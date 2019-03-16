@@ -3,6 +3,8 @@ package com.database.dao;
 import com.model.Address;
 import com.model.Employee;
 import com.model.Job;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class EmployeeDao implements Dao<Employee> {
+    private static final Logger logger = LogManager.getLogger(EmployeeDao.class);
     private static final Connection connection = MySqlConnection.getInstance().getConnection();
     private static final String SELECT_FROM_EMPLOYEE = "SELECT * FROM employee";
     private static final String DELETE_FROM_EMPLOYEE = "DELETE FROM employee WHERE employee_id=?";
@@ -50,13 +53,14 @@ public class EmployeeDao implements Dao<Employee> {
                 LocalDate dateOfBirth = resultSet.getDate(DATE_OF_BIRTH).toLocalDate();
                 Address address = getAddress(id);
                 List<Job> jobs = getJobs(id);
-
                 employees.add(new Employee(id, name, lastName, phoneNumber, address, sex, email, dateOfBirth, jobs));
+                logger.info("Employee was received");
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return all employees");
         return employees;
     }
 
@@ -67,10 +71,12 @@ public class EmployeeDao implements Dao<Employee> {
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(DELETE_FROM_EMPLOYEE);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+            logger.info("Employee was deleted by id: " + id);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Employee wasn't deleted: " + id);
         return false;
     }
 
@@ -79,15 +85,18 @@ public class EmployeeDao implements Dao<Employee> {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_NAME);
             preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
+            logger.info("Employee was deleted by name: " + name);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Employee wasn't deleted: " + name);
         return false;
     }
 
     @Override
     public Employee getById(Long id) {
+        Employee employee = new Employee();
         try {
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_WITH_CONDITION);
             preparedStatement.setLong(1, id);
@@ -104,7 +113,6 @@ public class EmployeeDao implements Dao<Employee> {
                 Address address = getAddress(employeeId);
                 List<Job> jobs = getJobs(employeeId);
 
-                Employee employee = new Employee();
                 employee.setId(id);
                 employee.setName(name);
                 employee.setEmail(email);
@@ -114,12 +122,12 @@ public class EmployeeDao implements Dao<Employee> {
                 employee.setPhoneNumber(phoneNumber);
                 employee.setAddress(address);
                 employee.setJobs(jobs);
-                return employee;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
-        return null;
+        logger.info("Employee was received by id: " + id);
+        return employee;
     }
 
     @Override
@@ -134,8 +142,9 @@ public class EmployeeDao implements Dao<Employee> {
             preparedStatement.setDate(6, Date.valueOf(employee.getDateOfBirth()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Employee was added to database");
         return employee;
     }
 
@@ -158,9 +167,11 @@ public class EmployeeDao implements Dao<Employee> {
                 preparedStatement.setLong(7, id);
             }
             preparedStatement.executeUpdate();
+            logger.info("Employee was updated by id: " + id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return id employee what was updated by id:" + id);
         return employee.getId();
     }
 
@@ -174,6 +185,7 @@ public class EmployeeDao implements Dao<Employee> {
             address.setCity(resultSetForAddress.getString(CITY));
             address.setZipCode(resultSetForAddress.getInt(ZIP_CODE));
         }
+        logger.info("Return address certain employee by id: " + id);
         return address;
     }
 
@@ -186,6 +198,7 @@ public class EmployeeDao implements Dao<Employee> {
             jobs.add(new Job(resultSet1.getString(COMPANY_NAME), resultSet1.getDate(START_DATE).toLocalDate(),
                     resultSet1.getDate(END_DATE).toLocalDate(), resultSet1.getString(POSITION)));
         }
+        logger.info("Return jobs certain employee by id: " + id);
         return jobs;
     }
 

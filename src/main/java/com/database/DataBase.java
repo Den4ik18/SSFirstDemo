@@ -15,13 +15,11 @@ public class DataBase {
 
         System.out.println("====================================");
         Employee employee = new Employee();
-//        boolean remove = employeeDao.remove(10L);
-//        System.out.println(remove);
+//      boolean remove = employeeDao.remove(10L);
+//      System.out.println(remove);
         List<Employee> all = employeeDao.getAll();
         for (Employee em : all) {
             System.out.println(em);
         }
-
     }
-
 }

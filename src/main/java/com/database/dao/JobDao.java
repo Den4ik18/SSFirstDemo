@@ -1,6 +1,8 @@
 package com.database.dao;
 
 import com.model.Job;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class JobDao implements Dao<Job> {
+    private static final Logger logger = LogManager.getLogger(JobDao.class);
     private static final Connection connection = MySqlConnection.getInstance().getConnection();
     private static final String SELECT_FROM_JOB = "SELECT * FROM job";
     private static final String DELETE_FROM_JOB = "DELETE FROM job WHERE job_id=?";
@@ -36,11 +39,12 @@ public class JobDao implements Dao<Job> {
                 LocalDate endDate = resultSet.getDate(END_DATE).toLocalDate();
                 String position = resultSet.getString(POSITION);
                 jobs.add(new Job(id, companyName, startDate, endDate, position));
+                logger.info("Jobs was received");
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return all jobs");
         return jobs;
     }
 
@@ -51,10 +55,12 @@ public class JobDao implements Dao<Job> {
             preparedStatement = Objects.requireNonNull(connection).prepareStatement(DELETE_FROM_JOB);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+            logger.info("Job was deleted by id: " + id);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Job wasn't deleted by id: " + id);
         return false;
     }
 
@@ -63,15 +69,18 @@ public class JobDao implements Dao<Job> {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_JOB_BY_COMPANY_NAME);
             preparedStatement.setString(1, companyName);
             preparedStatement.executeUpdate();
+            logger.info("Job was deleted by company name: " + companyName);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Job wasn't deleted by company name:" + companyName);
         return false;
     }
 
     @Override
     public Job getById(Long id) {
+        Job job = new Job();
         PreparedStatement preparedStatement;
         try {
             preparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_WITH_CONDITION);
@@ -82,17 +91,16 @@ public class JobDao implements Dao<Job> {
                 LocalDate startDate = resultSet.getDate(START_DATE).toLocalDate();
                 String position = resultSet.getString(POSITION);
                 LocalDate endDate = resultSet.getDate(END_DATE).toLocalDate();
-                Job job = new Job();
                 job.setCompanyName(companyName);
                 job.setStartDate(startDate);
                 job.setEndDate(endDate);
                 job.setPosition(position);
-                return job;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
-        return null;
+        logger.info("Return job by id: " + id);
+        return job;
     }
 
     @Override
@@ -104,9 +112,11 @@ public class JobDao implements Dao<Job> {
             preparedStatement.setDate(2, Date.valueOf(job.getStartDate()));
             preparedStatement.setString(4, job.getPosition());
             preparedStatement.executeUpdate();
+            logger.info("Job was added to database");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return job what was added to database");
         return job;
     }
 
@@ -119,8 +129,9 @@ public class JobDao implements Dao<Job> {
             preparedStatement.setDate(3, Date.valueOf(job.getEndDate()));
             preparedStatement.setLong(5, employeeId);
             preparedStatement.executeUpdate();
+            logger.info("Job was added for certain employee by id: " + employeeId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -136,9 +147,11 @@ public class JobDao implements Dao<Job> {
                 preparedStatement.setLong(5, id);
             }
             preparedStatement.executeUpdate();
+            logger.info("Job was updated by id: " + id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
+        logger.info("Return id job what was updated" + job.getId());
         return job.getId();
 
     }
