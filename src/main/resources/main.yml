@@ -1,27 +1,5 @@
 ---
-- id: 1
-  name: "Dmytro"
-  phoneNumber: "+38098443423"
-  lastName: "Havrulov"
-  address:
-    id: null
-    street: "Holovna ,110"
-    city: "Chernivtsi"
-    zipCode: 58000
-  sex: "male"
-  email: "dmutro12@mail.ru"
-  dateOfBirth: "1990-10-05"
-  jobs:
-  - id: 1
-    companyName: "SoftServe"
-    startDate: "2014-10-13"
-    endDate: "2015-10-13"
-    position: "junior"
-  - id: 1
-    companyName: "InventorSoft"
-    startDate: "2017-10-13"
-    endDate: "2018-10-13"
-    position: "junior"
+- null
 - id: 1
   name: "Denys"
   phoneNumber: "+380973999060"

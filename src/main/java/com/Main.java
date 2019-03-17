@@ -1,10 +1,12 @@
 package com;
 
+import com.model.Employee;
 import com.parser.YamlParser;
 import com.service.ParserService;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * This class for parsing files.
@@ -16,6 +18,10 @@ public class Main {
         ParserService parserService = new ParserService();
         parserService.setEmployees(parserService.searchEmployeeInSingleFile(new File("src/main/resources/inputFile.txt")));
 
+        List<Employee> employees = parserService.getEmployees();
+        for (Employee employee : employees){
+            System.out.println(employee);
+        }
         parserService.getEmployees().forEach(employee -> employee.getJobs().stream()
                 .filter(job -> job.getEndDate() == null)
                 .forEach(job -> job.setEndDate(LocalDate.now())));

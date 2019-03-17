@@ -7,12 +7,14 @@ import com.dateadapter.LocalDateDeserializer;
 import com.dateadapter.LocalDateSerializer;
 
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@XmlRootElement(name = "jobs")
+@XmlRootElement
 public class Job {
     @NotNull(message = "id must be not null")
     @PositiveOrZero(message = "id must be positive or zero")
@@ -107,7 +109,7 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return id.equals(job.id) &&
+        return id==(job.id) &&
                 Objects.equals(companyName, job.companyName) &&
                 Objects.equals(startDate, job.startDate) &&
                 Objects.equals(endDate, job.endDate) &&

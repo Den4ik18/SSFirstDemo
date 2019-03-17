@@ -53,22 +53,18 @@ public class XmlParser {
             employeeFromXmlFile = (Employee) unmarshaller.unmarshal(file);
             logger.info("Employee was received");
         } catch (JAXBException ex) {
-            logger.error(ex.getMessage());
+            logger.error(ex.fillInStackTrace().getStackTrace());
         }
         logger.info("Return employee from xml file");
         return employeeFromXmlFile;
     }
 
-    public void exportXML(String fileName, Employee employee) throws IOException {
+    public static void exportXML(String fileName, Employee employee) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.writeValue(new File(fileName), employee);
         logger.info("Xml file was written");
-        File file = new File(fileName);//maybe dont need
+        File file = new File(fileName);
     }
 
-    public Employee importXML(String line) throws IOException {
-        XmlMapper xmlMapper = new XmlMapper();
-        return xmlMapper.readValue(line, Employee.class);
-    }
 
 }

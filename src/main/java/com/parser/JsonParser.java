@@ -16,10 +16,6 @@ import java.nio.file.StandardOpenOption;
 public class JsonParser {
     private static final Logger logger = LogManager.getLogger(JsonParser.class);
 
-    public static Employee getEmployeeWithJsonFile(String line) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.fromJson(line, Employee.class);
-    }
 
     public static void writeJsonFromEmployee(Employee employee) {
         GsonBuilder gsonBuilder = new GsonBuilder();

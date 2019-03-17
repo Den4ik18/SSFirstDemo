@@ -9,16 +9,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.parser.JsonParser.getEmployeeFromJsonFile;
-import static com.parser.JsonParser.writeJsonFromEmployee;
-import static com.parser.XmlParser.getEmployeeWithXmlFile;
-import static com.parser.XmlParser.writeToXmlFileFromEmployee;
+import static com.parser.JsonParser.*;
+import static com.parser.XmlParser.*;
 
 public class ParsersTest {
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
@@ -57,6 +56,20 @@ public class ParsersTest {
                 employeeFromJson
         };
     }
+    @DataProvider
+    public Object[] getTxtEmployee() {
+        Job jobOnServe = new Job("InventorSort", LocalDate.parse("2016-04-10"),
+                LocalDate.parse("2017-09-13"), "junior");
+        List<Job> jobs = new ArrayList<>();
+        jobs.add(jobOnServe);
+        employeeFromJson = new Employee("Petro", "Ivanov", "+38098443423", new Address(" Holovna 220", "Chernivtsi", 58000),
+                "male", "petro.ivanov@ukr.net", jobs);
+        employeeFromJson.setDateOfBirth(LocalDate.parse("1990-10-05"));
+        return new Object[]{
+                employeeFromJson
+        };
+    }
+
 
     @Test(dataProvider = "getXmlEmployee")
     public void pasreXmlFileAndReturnTrueWhenObjectsAreEquals(Employee expectedEmployee) {
@@ -64,11 +77,23 @@ public class ParsersTest {
         Assert.assertEquals(employee, expectedEmployee);
 
     }
+    @Test(dataProvider = "getXmlEmployee")
+    public void exportEmployeeToXmlFileAndReturnTrueWhenObjectAreEquals(Employee expectedEmployee) throws IOException {
+        exportXML("src/main/resources/xmlFileForTest.xml",expectedEmployee);
+        Employee employee = getEmployeeWithXmlFile(new File("src/main/resources/xmlFile.xml"));
+        Assert.assertEquals(employee,expectedEmployee);
+    }
 
     @Test(dataProvider = "getJsonEmployee")
     public void parseJsonFileAndReturnTrueWhenObjectsAreEquals(Employee expectedEmployee) {
         Employee employee = getEmployeeFromJsonFile(new File("src/main/resources/jsonFile.json"));
         Assert.assertEquals(employee, expectedEmployee);
+    }
+    @Test(dataProvider = "getJsonEmployee")
+    public void exportEmployeeToJsonFileThenReadHimAndReturnTrueWhenObjectsAreEquals(Employee expectedEmployee){
+        exportJson("src/main/resources/jsonFileForTest.json",expectedEmployee);
+        Employee employee = getEmployeeFromJsonFile(new File("src/main/resources/jsonFileForTest.json"));
+        Assert.assertEquals(employee,expectedEmployee);
     }
 
     @Test(dataProvider = "getXmlEmployee")

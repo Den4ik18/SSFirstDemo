@@ -8,7 +8,7 @@ import com.dateadapter.LocalDateDeserializer;
 import com.dateadapter.LocalDateSerializer;
 
 import javax.validation.constraints.*;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,7 +18,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 
-@XmlRootElement(name = "employee")
+
+@XmlRootElement
 public class Employee {
     @NotNull(message = "id must be not null")
     @PositiveOrZero(message = "id must be positive or zero")
@@ -56,6 +57,7 @@ public class Employee {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateOfBirth;
+
 
     @NotNull(message = "job list must be not null")
     private List<Job> jobs = new ArrayList<>();
