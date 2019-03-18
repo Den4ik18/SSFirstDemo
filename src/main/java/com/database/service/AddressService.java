@@ -5,7 +5,7 @@ import com.model.Address;
 
 import java.util.List;
 
-public class AddressService  implements Service<Address>,AdditionalService<Address> {
+public class AddressService implements Service<Address>, AdditionalService<Address> {
     private AddressDao addressDao;
 
     @Override
@@ -15,32 +15,33 @@ public class AddressService  implements Service<Address>,AdditionalService<Addre
 
     @Override
     public boolean remove(Long id) {
+
         return addressDao.remove(id);
     }
 
     @Override
     public Address getById(Long id) {
+
         return addressDao.getById(id);
     }
 
     @Override
     public Address add(Address address) {
-        return addressDao.add(address);//temporary
+        return addressDao.add(address);
     }
 
     @Override
     public Long update(Address address, Long id) {
-        return addressDao.update(address,id);
+        return addressDao.update(address, id);
     }
 
-    //Temporary method
     @Override
     public boolean removeByParameter(String street) {
         return addressDao.removeByStreet(street);
     }
-    //Temporary method
+
     @Override
     public void addObjectForEmployee(Address address, Long id) {
-         addressDao.addJobForEmployee(address,id);
+        addressDao.addAddressForEmployee(address, id);
     }
 }

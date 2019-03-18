@@ -5,8 +5,9 @@ import com.model.Job;
 
 import java.util.List;
 
-public class JobService implements Service<Job>,AdditionalService<Job> {
+public class JobService implements Service<Job>, AdditionalService<Job> {
     private JobDao jobDao;
+
     @Override
     public List<Job> getAll() {
         return jobDao.getAll();
@@ -29,17 +30,16 @@ public class JobService implements Service<Job>,AdditionalService<Job> {
 
     @Override
     public Long update(Job job, Long id) {
-        return jobDao.update(job,id);
+        return jobDao.update(job, id);
     }
 
-    //Temporary method
     @Override
     public boolean removeByParameter(String companyName) {
         return jobDao.removeByCompanyName(companyName);
     }
-    //Temporary method
+
     @Override
     public void addObjectForEmployee(Job job, Long id) {
-          jobDao.addJobForEmployee(job,id);
+        jobDao.addJobForEmployee(job, id);
     }
 }

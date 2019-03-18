@@ -107,7 +107,7 @@ public class AddressDao implements Dao<Address> {
         return address;
     }
 
-    public void addJobForEmployee(Address address, Long employeeId) {
+    public void addAddressForEmployee(Address address, Long employeeId) {
         try {
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(INSERT_INTO_ADDRESS_WITH_EMPLOYEE_ID);
             preparedStatement.setString(1, address.getStreet());

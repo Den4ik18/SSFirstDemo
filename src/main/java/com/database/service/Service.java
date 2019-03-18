@@ -12,4 +12,6 @@ public interface Service<T> {
     T add(T ob);
 
     Long update(T ob, Long id);
+
+    boolean removeByParameter(String parameter);
 }

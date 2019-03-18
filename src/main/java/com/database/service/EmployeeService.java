@@ -7,6 +7,7 @@ import java.util.List;
 
 public class EmployeeService implements Service<Employee> {
     private EmployeeDao employeeDao;
+
     @Override
     public List<Employee> getAll() {
         return employeeDao.getAll();
@@ -14,7 +15,7 @@ public class EmployeeService implements Service<Employee> {
 
     @Override
     public boolean remove(Long id) {
-       return employeeDao.remove(id);
+        return employeeDao.remove(id);
     }
 
     @Override
@@ -29,6 +30,11 @@ public class EmployeeService implements Service<Employee> {
 
     @Override
     public Long update(Employee employee, Long id) {
-        return employeeDao.update(employee,id);
+        return employeeDao.update(employee, id);
+    }
+
+    @Override
+    public boolean removeByParameter(String name) {
+        return employeeDao.removeByName(name);
     }
 }
