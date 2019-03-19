@@ -6,7 +6,7 @@ import com.model.Job;
 import java.util.List;
 
 public class JobService implements Service<Job>, AdditionalService<Job> {
-    private JobDao jobDao;
+    private JobDao jobDao = new JobDao();
 
     @Override
     public List<Job> getAll() {

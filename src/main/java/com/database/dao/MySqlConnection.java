@@ -27,11 +27,11 @@ public class MySqlConnection {
         }
     }
 
-    Connection getConnection() {
+     Connection getConnection() {
         return connection;
     }
 
-    static MySqlConnection getInstance() {
+     static MySqlConnection getInstance() {
         if (instance == null) {
             instance = new MySqlConnection();
         } else {

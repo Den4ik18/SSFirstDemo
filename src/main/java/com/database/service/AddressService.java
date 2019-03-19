@@ -6,7 +6,7 @@ import com.model.Address;
 import java.util.List;
 
 public class AddressService implements Service<Address>, AdditionalService<Address> {
-    private AddressDao addressDao;
+    private AddressDao addressDao = new AddressDao();
 
     @Override
     public List<Address> getAll() {

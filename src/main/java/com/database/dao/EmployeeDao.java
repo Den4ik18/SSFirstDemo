@@ -98,6 +98,7 @@ public class EmployeeDao implements Dao<Employee> {
     public Employee getById(Long id) {
         Employee employee = new Employee();
         try {
+            Connection connection = MySqlConnection.getInstance().getConnection();
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_WITH_CONDITION);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
