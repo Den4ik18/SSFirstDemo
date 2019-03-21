@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.dateadapter.LocalDateDeserializer;
 import com.dateadapter.LocalDateSerializer;
+import com.validation.Validator;
 
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
@@ -187,6 +188,17 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, phoneNumber, lastName, address, sex, email, dateOfBirth, jobs);
+    }
+
+    public boolean validate(){
+        boolean flag = true;
+        for(Job job :jobs){
+            if(!Validator.validate(job)){
+                flag = false;
+                break;
+            }
+        }
+        return flag&&Validator.validate(this);
     }
 
     public List<Job> getJobs() {

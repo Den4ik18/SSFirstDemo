@@ -6,11 +6,12 @@
 
    <!-- <servlet>
         <servlet-name>employee</servlet-name>
-        <servlet-class>com.web.EmployeeServlet</servlet-class>
+        <servlet-class>com.web.employeeservlet.EmployeeServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>employee</servlet-name>
         <url-pattern>/employee</url-pattern>
     </servlet-mapping>-->
+
 </web-app>

@@ -9,22 +9,45 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Address List</title>
+    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 </head>
 <body>
-<section>
-    <h3>Address info</h3>
-    <table>
-        <c:forEach items="${addresses}" var="address">
+<div class="generic-container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of Employees </span></div>
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <td><c:out value="${address.street}"/></td>
-                <td><c:out value="${address.city}"/></td>
-                <td><c:out value="${address.zipCode}"/></td>
-                    <%-- <td>${address}</td>--%>
+                <th>Street</th>
+                <th>City</th>
+                <th>Zip code</th>
+                <th width="200"></th>
+                <th width="200"></th>
             </tr>
-        </c:forEach>
-    </table>
-</section>
-<li><a href="index.jsp">Go back</a></li>
+            </thead>
+            <tbody>
+            <c:forEach items="${addresses}" var="address">
+                <tr>
+                    <td>${address.street}</td>
+                    <td>${address.city}</td>
+                    <td>${address.zipCode}</td>
+
+                    <td><a href="<c:url value='/edit-address-${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
+                    <td><a href="<c:url value='/delete'/>" class="btn btn-danger custom-width">Delete</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div class="well">
+        <li><a href="<c:url value='/addAddress' />">Add New Address</a>
+        <li><a href="index.jsp">Go back</a>
+    </div>
+</div>
+
 </body>
 </html>

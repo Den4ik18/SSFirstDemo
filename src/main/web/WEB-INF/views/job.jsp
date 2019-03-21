@@ -21,7 +21,7 @@
                 <td><c:out value="${job.startDate}"/></td>
                 <td><c:out value="${job.endDate}"/></td>
                 <td><c:out value="${job.position}"/></td>
-                    <%-- <td>${job}</td>--%>
+                     <%--<td>${job}</td>--%>
             </tr>
         </c:forEach>
     </table>

@@ -1,4 +1,4 @@
-package com.web;
+package com.web.addressservlet;
 
 import com.database.service.AddressService;
 import com.model.Address;
@@ -18,9 +18,8 @@ import java.util.List;
 @WebServlet(urlPatterns = "/address")
 public class AddressServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AddressServlet.class);
-
+    private AddressService service = new AddressService();
     private List<Address> addresses = new ArrayList<>();
-    private AddressService addressService = new AddressService();
 
     public AddressServlet() {
         super();
@@ -28,7 +27,7 @@ public class AddressServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) {
-        addresses = addressService.getAll();
+        addresses = service.getAll();
     }
 
     @Override
