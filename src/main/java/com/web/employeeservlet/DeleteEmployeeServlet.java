@@ -5,9 +5,7 @@ import com.model.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/delete")
+@WebServlet(urlPatterns = "/delete-employee")
 public class DeleteEmployeeServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(DeleteEmployeeServlet.class);
-    private static final long serialVersionUID = 1L;
-
-    private Employee employee;
+    private Long id;
     private EmployeeService service = new EmployeeService();
     private List<Employee> employees = new ArrayList<>();
 
@@ -34,8 +30,16 @@ public class DeleteEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("employees", service.getAll());
         request.getRequestDispatcher("/WEB-INF/views/employee.jsp").forward(request, response);
-        String id = request.getParameter("id");
-        System.out.println("Id:"+ id);
+        id = Long.valueOf(request.getParameter("id"));
+        service.remove(id);
+        response.sendRedirect("/com_serve_main_war_exploded/employee");
+
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        super.doDelete(req, resp);
+        service.remove(id);
     }
 
     @Override

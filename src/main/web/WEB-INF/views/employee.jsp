@@ -42,7 +42,7 @@
                     <td>${employee.email}</td>
                     <td>${employee.dateOfBirth}</td>
                     <td><a href="<c:url value='/edit-employee-${employee.id}' />" class="btn btn-success custom-width">Edit</a></td>
-                    <td><a href="<c:url value='/delete'/>" class="btn btn-danger custom-width">Delete</a></td>
+                    <td><a href="<c:url value='/delete-employee?id=${employee.id}' />" class="btn btn-danger custom-width">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
