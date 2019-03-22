@@ -2,7 +2,7 @@ package com.web.employeeservlet;
 
 import com.database.service.EmployeeService;
 import com.model.Employee;
-import jdk.nashorn.internal.parser.DateParser;
+import com.validation.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/addEmployee")
@@ -42,28 +41,24 @@ public class AddEmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String lastName = request.getParameter("lastName");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String sex = request.getParameter("sex");
-        String email = request.getParameter("email");
         LocalDate dateOfBirth = LocalDate.parse(request.getParameter("dateOfBirth"));
-
         Employee employee = new Employee();
-        employee.setName(name);
-        employee.setLastName(lastName);
-        employee.setPhoneNumber(phoneNumber);
-        employee.setSex(sex);
-        employee.setEmail(email);
+        employee.setName(request.getParameter("name"));
+        employee.setLastName(request.getParameter("lastName"));
+        employee.setPhoneNumber(request.getParameter("phoneNumber"));
+        employee.setSex(request.getParameter("sex"));
+        employee.setEmail(request.getParameter("email"));
         employee.setDateOfBirth(dateOfBirth);
-
+       /* if (Validator.validate(employee)) {
+            service.add(employee);
+            response.sendRedirect("/com_serve_main_war_exploded/employee");
+        } else {
+            response.sendRedirect("/com_serve_main_war_exploded/addEmployee");
+        }*/
         service.add(employee);
-
         List<Employee> employees = service.getAll();
         request.setAttribute("employees", employees);
         request.getRequestDispatcher("/WEB-INF/views/employee.jsp").forward(request, response);
-
-//        response.sendRedirect("/com_serve_main_war_exploded/employee");
     }
 
 }

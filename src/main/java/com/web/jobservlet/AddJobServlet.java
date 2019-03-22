@@ -1,4 +1,4 @@
-package com.web;
+package com.web.jobservlet;
 
 import com.database.service.JobService;
 import com.model.Job;
@@ -12,19 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/job")
-public class JobServlet extends HttpServlet {
-    private static final Logger logger = LogManager.getLogger(JobServlet.class);
-    private static final long serialVersionUID = 1L;
-
-    private Job job;
+@WebServlet(urlPatterns = "/addJob")
+public class AddJobServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(AddJobServlet.class);
     private JobService service = new JobService();
-    private List<Job> jobs = new ArrayList<>();
+    private List<Job> jobs;
 
-    public JobServlet() {
+    public AddJobServlet() {
         super();
     }
 
@@ -35,13 +33,23 @@ public class JobServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("jobs", jobs);
-        request.getRequestDispatcher("/WEB-INF/views/job.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/addJob.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        Job job = new Job();
+        job.setCompanyName(request.getParameter("companyName"));
+        job.setStartDate(LocalDate.parse(request.getParameter("startDate")));
+        job.setEndDate(LocalDate.parse(request.getParameter("endDate")));
+        job.setPosition(request.getParameter("position"));
+
+        service.add(job);
+
+        List<Job> jobs = service.getAll();
+        request.setAttribute("jobs", jobs);
+        request.getRequestDispatcher("/WEB-INF/views/job.jsp").forward(request, response);
+
     }
 }

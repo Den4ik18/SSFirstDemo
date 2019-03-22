@@ -5,7 +5,6 @@ import com.model.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +20,6 @@ public class EmployeeServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(EmployeeServlet.class);
     private static final long serialVersionUID = 1L;
 
-
-    private Employee employee;
     private EmployeeService service = new EmployeeService();
     private List<Employee> employees = new ArrayList<>();
 
@@ -37,17 +34,16 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*  *//* RequestDispatcher dispatcher = this.getServletContext()
+        request.setAttribute("employees", employees);
+        request.getRequestDispatcher("/WEB-INF/views/employee.jsp").forward(request, response);
+
+         /*RequestDispatcher dispatcher = this.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/employee.jsp");
                 dispatcher.forward(request, response);*/
-        request.setAttribute("employees", employees);
-
-        request.getRequestDispatcher("/WEB-INF/views/employee.jsp").forward(request, response);
 
         // String action = request.getParameter("action");
         /*request.setAttribute("employee", employee);
         request.getRequestDispatcher("/WEB-INF/views/employee.jsp").forward(request, response);*/
-
     }
 
     @Override
@@ -56,4 +52,6 @@ public class EmployeeServlet extends HttpServlet {
 
         doGet(request, response);
     }
+
+
 }

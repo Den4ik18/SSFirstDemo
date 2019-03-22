@@ -1,7 +1,8 @@
-package com.web.employeeservlet;
+package com.web.addressservlet;
 
+import com.database.service.AddressService;
 import com.database.service.EmployeeService;
-import com.model.Employee;
+import com.web.employeeservlet.DeleteEmployeeServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,27 +12,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(urlPatterns = "/delete-employee")
-public class DeleteEmployeeServlet extends HttpServlet {
-    private static final Logger logger = LogManager.getLogger(DeleteEmployeeServlet.class);
+@WebServlet(urlPatterns = "/delete-address")
+public class DeleteAddressServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(DeleteAddressServlet.class);
     private Long id;
-    private EmployeeService service = new EmployeeService();
+    private AddressService service = new AddressService();
 
-    public DeleteEmployeeServlet() {
+    public DeleteAddressServlet() {
         super();
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("employees", service.getAll());
-        request.getRequestDispatcher("/WEB-INF/views/employee.jsp").forward(request, response);
+        request.setAttribute("addresses", service.getAll());
+        request.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(request, response);
         id = Long.valueOf(request.getParameter("id"));
         doDelete(request, response);
-        response.sendRedirect("/com_serve_main_war_exploded/employee");
+        response.sendRedirect("/com_serve_main_war_exploded/address");
     }
 
     @Override

@@ -18,7 +18,7 @@
 <div class="generic-container">
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">List of Employees </span></div>
+        <div class="panel-heading"><span class="lead">List of Address </span></div>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -37,7 +37,7 @@
                     <td>${address.zipCode}</td>
 
                     <td><a href="<c:url value='/edit-address-${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
-                    <td><a href="<c:url value='/delete'/>" class="btn btn-danger custom-width">Delete</a></td>
+                    <td><a href="<c:url value='/delete-address?id=${address.id}'/>" class="btn btn-danger custom-width">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
