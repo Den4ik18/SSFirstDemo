@@ -46,9 +46,9 @@
         </table>
     </div>
     <div class="well">
-        <li><a href="<c:url value='/addJob' />">Add New Job</a>
-        <li><a href="index.jsp">Go back</a>
+        <a href="<c:url value='/addJob' />" class="btn btn-success custom-width2">Add New Job</a>
     </div>
+    <li><a href="index.jsp">Go back</a>
 </div>
 
 </body>

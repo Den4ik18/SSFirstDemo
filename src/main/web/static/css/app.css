@@ -27,14 +27,14 @@ body, .form-control{
   background-color: #EAE7E7;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-shadow: 0 0 30px black;
+  box-shadow: 0 0 30px #00000050;
 }
 
 .custom-width {
     width: 80px !important;
 }
 .custom-width2 {
-    width: 135px !important;
+    width: 155px !important;
 }
 
 

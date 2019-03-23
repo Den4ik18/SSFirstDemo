@@ -5,7 +5,6 @@ import com.model.Address;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,24 +20,29 @@ public class AddressServlet extends HttpServlet {
     private AddressService service = new AddressService();
     private List<Address> addresses = new ArrayList<>();
 
-    public AddressServlet() {
-        super();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("add") != null) {
+            req.getRequestDispatcher("/WEB-INF/views/addAddress.jsp").forward(req, resp);
+        } else {
+            List<Address> address = service.getAll();
+            req.setAttribute("address", address);
+            req.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(req, resp);
+        }
     }
 
     @Override
-    public void init(ServletConfig config) {
-        addresses = service.getAll();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Address address = new Address();
+        address.setStreet(req.getParameter("street"));
+        address.setCity(req.getParameter("city"));
+        address.setZipCode(Integer.parseInt(req.getParameter("zipCode")));
+        service.add(address);
+        resp.sendRedirect("/com_serve_main_war_exploded/address");
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("addresses", addresses);
-        request.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
+        service.remove(Long.parseLong(req.getParameter("id")));
     }
 }

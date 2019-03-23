@@ -49,9 +49,9 @@
         </table>
     </div>
     <div class="well">
-        <li><a href="<c:url value='/addEmployee' />">Add New User</a>
-        <li><a href="index.jsp">Go back</a>
+        <a href="<c:url value='/addEmployee' />" class="btn btn-success custom-width2">Add New User</a>
     </div>
+    <li><a href="index.jsp">Go back</a>
 </div>
 
 </body>

@@ -1,10 +1,8 @@
 package com.web.addressservlet;
 
 import com.database.service.AddressService;
-import com.database.service.EmployeeService;
 import com.model.Address;
 import com.model.Employee;
-import com.web.employeeservlet.AddEmployeeServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,16 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/addAddress")
-public class AddAddressServlet extends HttpServlet {
-    private static final Logger logger = LogManager.getLogger(AddAddressServlet.class);
-
+@WebServlet(urlPatterns = "/update-address")
+public class UpdateAddressServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(UpdateAddressServlet.class);
+    Long id;
     private AddressService service = new AddressService();
+    private Address address = new Address();
 
-    public AddAddressServlet() {
+    public UpdateAddressServlet() {
         super();
     }
 
@@ -35,28 +33,34 @@ public class AddAddressServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/addAddress.jsp").forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String street = request.getParameter("street");
-        String city = request.getParameter("city");
-        String zipCode = request.getParameter("zipCode");
-        Address address = new Address();
-        address.setStreet(street);
-        address.setCity(city);
-        address.setZipCode(Integer.parseInt(zipCode));
+        /*id = Long.valueOf(request.getParameter("id"));
+        address = service.getById(id);
+        request.setAttribute("street",address.getStreet());
+        request.setAttribute("city",address.getCity());
+        request.setAttribute("zipCode",address.getZipCode());*/
+        String action = request.getParameter("action");
+        if ("submit".equals(action)) {
+            address.setId(Long.valueOf(request.getParameter("id")));
+            address.setStreet(request.getParameter("street"));
+            address.setCity(request.getParameter("city"));
+            address.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
+        }
+        request.setAttribute("address", address);
+        request.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(request, response);
 
-        service.add(address);
+
+
+        /*service.update(address,id);
 
         List<Address> addresses = service.getAll();
         request.setAttribute("addresses", addresses);
         request.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(request, response);
-
+*/
 //        response.sendRedirect("/com_serve_main_war_exploded/employee");
     }
-
-
 }

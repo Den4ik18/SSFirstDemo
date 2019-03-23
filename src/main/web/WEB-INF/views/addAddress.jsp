@@ -20,7 +20,7 @@
 <div class="generic-container">
     <div class="well lead">Add address</div>
     <%--@elvariable id="employee" type="com.model.Employee"--%>
-    <form method="post" class="form-horizontal">
+    <form method="post" action="${pageContext.request.contextPath}/address" class="form-horizontal">
         <input type="hidden" path="id" id="id"/>
         <div class="row">
             <div class="form-group col-md-12">
@@ -50,18 +50,18 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="zipCode">Zip code</label>
                 <div class="col-md-7">
-                    <c:choose>
-                        <c:when test="${edit}">
+                 <%--   <c:choose>
+                        <c:when test="${update-address}">
                             <input type="text" path="zipCode" id="zipCode" name = "zipCode" class="form-control input-sm"
                                    disabled="true"/>
                         </c:when>
-                        <c:otherwise>
+                        <c:otherwise>--%>
                             <input type="text" path="zipCode" id="zipCode" name = "zipCode" class="form-control input-sm"/>
                             <div class="has-error">
                                 <errors path="zipCode" class="help-inline"></errors>
                             </div>
-                        </c:otherwise>
-                    </c:choose>
+                       <%-- </c:otherwise>
+                    </c:choose>--%>
                 </div>
             </div>
         </div>
@@ -69,14 +69,14 @@
         <div class="row">
             <div class="form-actions floatRight">
                 <%--<c:choose>
-                    <c:when test="${edit}">
+                    <c:when test="${update-address}">
                         <input type="submit" value="Update" class="btn btn-primary btn-sm"/> or <a
-                            href="<c:url value='employee' />">Cancel</a>
+                            href="<c:url value='address' />">Cancel</a>
                     </c:when>
                     <c:otherwise>--%>
-                <input type="submit" value="Add" class="btn btn-primary btn-sm"/> or <a
+                <input type="submit" value="Add" class="btn btn-primary btn-sm" />  or <a
                     href="<c:url value='address' />">Cancel</a>
-                <%--  </c:otherwise>
+                 <%-- </c:otherwise>
               </c:choose>--%>
             </div>
         </div>

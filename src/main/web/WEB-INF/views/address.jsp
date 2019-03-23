@@ -13,11 +13,12 @@
     <title>Address List</title>
     <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/static/js/scriptForDelete.js' />" rel="stylesheet"/>
+    <script type="text/javascript" src="static/js/scriptForDelete.js"></script>
 </head>
 <body>
-<div class="generic-container">
+  <div class="generic-container">
     <div class="panel panel-default">
-        <!-- Default panel contents -->
         <div class="panel-heading"><span class="lead">List of Address </span></div>
         <table class="table table-hover">
             <thead>
@@ -30,24 +31,22 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${addresses}" var="address">
+           <c:forEach items="${address}" var="address">
                 <tr>
                     <td>${address.street}</td>
                     <td>${address.city}</td>
                     <td>${address.zipCode}</td>
-
-                    <td><a href="<c:url value='/edit-address-${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
-                    <td><a href="<c:url value='/delete-address?id=${address.id}'/>" class="btn btn-danger custom-width">Delete</a></td>
+                    <td><a href="<c:url value='/update-address?=id${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
+                    <td><button class="btn btn-danger custom-width" onClick = handleDelete(${address.id},"address")>Delete</button></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="well">
-        <li><a href="<c:url value='/addAddress' />">Add New Address</a>
-        <li><a href="index.jsp">Go back</a>
+      <a href="${pageContext.request.contextPath}/address?add=1" class="btn btn-success custom-width2">Add New Address</a>
+      <a href="${pageContext.request.contextPath}/">Go back</a>
     </div>
-</div>
-
+  </div>
 </body>
 </html>
