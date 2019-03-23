@@ -21,24 +21,24 @@ public class AddressServlet extends HttpServlet {
     private List<Address> addresses = new ArrayList<>();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("add") != null) {
-            req.getRequestDispatcher("/WEB-INF/views/addAddress.jsp").forward(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("add") != null) {
+            request.getRequestDispatcher("/WEB-INF/views/addAddress.jsp").forward(request, response);
         } else {
             List<Address> address = service.getAll();
-            req.setAttribute("address", address);
-            req.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(req, resp);
+            request.setAttribute("address", address);
+            request.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(request, response);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Address address = new Address();
-        address.setStreet(req.getParameter("street"));
-        address.setCity(req.getParameter("city"));
-        address.setZipCode(Integer.parseInt(req.getParameter("zipCode")));
+        address.setStreet(request.getParameter("street"));
+        address.setCity(request.getParameter("city"));
+        address.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
         service.add(address);
-        resp.sendRedirect("/com_serve_main_war_exploded/address");
+        response.sendRedirect("/com_serve_main_war_exploded/address");
     }
 
     @Override

@@ -7,7 +7,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Add address</title>
+    <title>Add employee</title>
     <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 </head>
@@ -16,8 +16,7 @@
 
 <div class="generic-container">
     <div class="well lead">Add employee</div>
-    <%--@elvariable id="employee" type="com.model.Employee"--%>
-    <form method="post" class="form-horizontal">
+    <form method="post" action="${pageContext.request.contextPath}/employee" class="form-horizontal">
         <input type="hidden" path="id" id="id"/>
         <div class="row">
             <div class="form-group col-md-12">
@@ -47,18 +46,10 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="phoneNumber">Phone number</label>
                 <div class="col-md-7">
-                    <c:choose>
-                        <c:when test="${edit}">
-                            <input type="text" path="phoneNumber" id="phoneNumber" name = "phoneNumber" class="form-control input-sm"
-                                        disabled="true"/>
-                        </c:when>
-                        <c:otherwise>
                             <input type="text" path="phoneNumber" id="phoneNumber" name = "phoneNumber" class="form-control input-sm"/>
                             <div class="has-error">
                                 <errors path="phoneNumber" class="help-inline"></errors>
                             </div>
-                        </c:otherwise>
-                    </c:choose>
                 </div>
             </div>
         </div>
@@ -101,17 +92,9 @@
 
         <div class="row">
             <div class="form-actions floatRight">
-                <%--<c:choose>
-                    <c:when test="${edit}">
-                        <input type="submit" value="Update" class="btn btn-primary btn-sm"/> or <a
-                            href="<c:url value='employee' />">Cancel</a>
-                    </c:when>
-                    <c:otherwise>--%>
                         <input type="submit" value="Add" class="btn btn-primary btn-sm"/> or <a
                             href="<c:url value='employee' />">Cancel</a>
-                  <%--  </c:otherwise>
-                </c:choose>--%>
-            </div>
+        </div>
         </div>
     </form>
 </div>

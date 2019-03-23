@@ -19,7 +19,7 @@
 
 <div class="generic-container">
     <div class="well lead">Add job</div>
-    <form method="post" class="form-horizontal">
+    <form method="post" action="${pageContext.request.contextPath}/job" class="form-horizontal">
         <input type="hidden" path="id" id="id"/>
         <div class="row">
             <div class="form-group col-md-12">

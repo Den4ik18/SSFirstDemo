@@ -45,8 +45,8 @@
     </div>
     <div class="well">
       <a href="${pageContext.request.contextPath}/address?add=1" class="btn btn-success custom-width2">Add New Address</a>
-      <a href="${pageContext.request.contextPath}/">Go back</a>
     </div>
+      <a href="${pageContext.request.contextPath}/">Go back</a>
   </div>
 </body>
 </html>

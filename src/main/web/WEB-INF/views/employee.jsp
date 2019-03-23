@@ -10,14 +10,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Users List</title>
+    <title>Employees List</title>
     <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/static/js/scriptForDelete.js' />" rel="stylesheet"/>
+    <script type="text/javascript" src="static/js/scriptForDelete.js"></script>
 </head>
 <body>
 <div class="generic-container">
     <div class="panel panel-default">
-        <!-- Default panel contents -->
         <div class="panel-heading"><span class="lead">List of Employees </span></div>
         <table class="table table-hover">
             <thead>
@@ -42,17 +43,16 @@
                     <td>${employee.email}</td>
                     <td>${employee.dateOfBirth}</td>
                     <td><a href="<c:url value='/edit-employee-${employee.id}' />" class="btn btn-success custom-width">Edit</a></td>
-                    <td><a href="<c:url value='/delete-employee?id=${employee.id}' />" class="btn btn-danger custom-width">Delete</a></td>
+                    <td><button class="btn btn-danger custom-width" onClick = handleDelete(${employee.id},"employee")>Delete</button></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="well">
-        <a href="<c:url value='/addEmployee' />" class="btn btn-success custom-width2">Add New User</a>
+        <a href="${pageContext.request.contextPath}/employee?add=1" class="btn btn-success custom-width2">Add New Employee</a>
     </div>
-    <li><a href="index.jsp">Go back</a>
+    <a href="${pageContext.request.contextPath}/">Go back</a>
 </div>
-
 </body>
 </html>

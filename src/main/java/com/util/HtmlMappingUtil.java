@@ -11,10 +11,11 @@ public class HtmlMappingUtil {
     private static String mapJobToTable(Job job){
         StringBuilder result = new StringBuilder();
         result.append("<tr>")
-                .append("<td>").append(job.getId()).append("</td>")
+//                .append("<td>").append(job.getId()).append("</td>")
                 .append("<td>").append(job.getStartDate()).append("</td>")
                 .append("<td>").append(job.getEndDate()).append("</td>")
                 .append("<td>").append(job.getPosition()).append("</td>")
+                .append("<td><button onClick = handleDelete(").append(job.getId()).append(")>Delete</button></td>")
                 .append("</tr>");
         return result.toString();
     }
