@@ -14,9 +14,11 @@
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 </head>
 <body>
+<div class="resumeTitle"><h1>Резюме</h1></div>
+<div class="bt1">
     <a align="center" href="employee" class="button-main">Employee</a>
     <a align="center" href="job" class="button-main">Job</a>
     <a align="center" href="address" class="button-main">Address</a>
-
+</div>
 </body>
 </html>

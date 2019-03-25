@@ -17,7 +17,7 @@
     <script type="text/javascript" src="static/js/scriptForDelete.js"></script>
 </head>
 <body>
-  <div class="generic-container">
+<div class="generic-container">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">List of Address </span></div>
         <table class="table table-hover">
@@ -26,27 +26,42 @@
                 <th>Street</th>
                 <th>City</th>
                 <th>Zip code</th>
+                <<th>Employee name</th>
                 <th width="200"></th>
                 <th width="200"></th>
             </tr>
             </thead>
             <tbody>
-           <c:forEach items="${address}" var="address">
+            <% int i = 0; %>
+            <c:forEach items="${address}" var="address">
                 <tr>
                     <td>${address.street}</td>
                     <td>${address.city}</td>
                     <td>${address.zipCode}</td>
-                    <td><a href="<c:url value='/update-address?id=${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
-                    <td><button class="btn btn-danger custom-width" onClick = handleDelete(${address.id},"address")>Delete</button></td>
+                    <% int j = 0; %>
+                    <c:forEach items="${name}" var="name">
+                        <% if(i == j) {%>
+                        <td>${name}</td>
+                        <% } ++j; %>
+                    </c:forEach>
+                    <% ++i; %>
+                    <td><a href="<c:url value='/update-address?id=${address.id}' />"
+                           class="btn btn-success custom-width">Edit</a></td>
+                    <td>
+                        <button class="btn btn-danger custom-width" onClick=handleDelete(${address.id},"address")>
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="well">
-      <a href="${pageContext.request.contextPath}/address?add=1" class="btn btn-success custom-width2">Add New Address</a>
+        <a href="${pageContext.request.contextPath}/address?add=1" class="btn btn-success custom-width2">Add New
+            Address</a>
     </div>
-      <a href="${pageContext.request.contextPath}/">Go back</a>
-  </div>
+    <a href="${pageContext.request.contextPath}/">Go back</a>
+</div>
 </body>
 </html>

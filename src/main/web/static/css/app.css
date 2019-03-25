@@ -36,10 +36,13 @@ body, .form-control{
 .custom-width2 {
     width: 155px !important;
 }
+.resumeTitle{
+    text-align: center;
+    margin-top: 50px;
+}
 .button-main {
     width: 300px;
-    margin-left: 250px;
-    margin-top: 500px;
+    margin-left: 240px;
     background-color:#68d651;
     border-radius:16px;
     font-size:36px;
@@ -60,6 +63,9 @@ body, .form-control{
 
     position:relative;
     top:1px;
+}
+.bt1{
+    padding-top: 200px;
 }
 
 

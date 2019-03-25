@@ -176,6 +176,37 @@ public class EmployeeDao implements Dao<Employee> {
         return employee.getId();
     }
 
+    public String getEmployeeNameByJobId(long id){
+        String employeeName = "";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT em.name FROM employee AS em WHERE em.employee_id = " +
+                    "(SELECT j.employee_id FROM job AS j WHERE j.job_id = ?)");
+            preparedStatement.setLong(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                employeeName = resultSet.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employeeName;
+    }
+    public String getEmployeeNameByAddressId(long id){
+        String employeeName = "";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT em.name FROM employee AS em WHERE em.employee_id = " +
+                    "(SELECT a.employee_id FROM address AS a WHERE a.address_id = ?)");
+            preparedStatement.setLong(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                employeeName = resultSet.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employeeName;
+    }
+
     private Address getAddress(long id) throws SQLException {
         PreparedStatement addressPreparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_ADDRESS);
         addressPreparedStatement.setLong(1, id);

@@ -1,6 +1,8 @@
 package com.web.jobservlet;
 
+import com.database.dao.EmployeeDao;
 import com.database.service.JobService;
+import com.model.Employee;
 import com.model.Job;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,12 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/job")
 public class JobServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(JobServlet.class);
     private JobService service = new JobService();
+    private EmployeeDao dao = new EmployeeDao();
+    private List<String> employeeName = new ArrayList<>();
 
     public JobServlet() {
         super();
@@ -29,6 +34,11 @@ public class JobServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/addJob.jsp").forward(request, response);
         } else {
             List<Job> jobs = service.getAll();
+            for (Job j : jobs) {
+                employeeName.add(dao.getEmployeeNameByJobId(j.getId()));
+                System.out.println(dao.getEmployeeNameByJobId(j.getId()));
+            }
+            request.setAttribute("name",employeeName);
             request.setAttribute("jobs", jobs);
             request.getRequestDispatcher("/WEB-INF/views/job.jsp").forward(request, response);
         }

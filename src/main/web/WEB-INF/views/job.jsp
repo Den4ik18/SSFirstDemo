@@ -27,17 +27,26 @@
                 <th>Start date</th>
                 <th>End date</th>
                 <th>Position</th>
+                <th>Employee name</th>
                 <th width="200"></th>
                 <th width="200"></th>
             </tr>
             </thead>
             <tbody>
+            <% int i = 0; %>
             <c:forEach items="${jobs}" var="job">
                 <tr>
                     <td>${job.companyName}</td>
                     <td>${job.startDate}</td>
                     <td>${job.endDate}</td>
                     <td>${job.position}</td>
+                    <% int j = 0; %>
+                    <c:forEach items="${name}" var="name">
+                        <% if(i == j) {%>
+                            <td>${name}</td>
+                        <% } ++j; %>
+                    </c:forEach>
+                    <% ++i; %>
                     <td><a href="<c:url value='/update-job?id=${job.id}' />" class="btn btn-success custom-width">Edit</a></td>
                     <td><button class="btn btn-danger custom-width" onClick = handleDelete(${job.id},"job")>Delete</button></td>
                 </tr>
