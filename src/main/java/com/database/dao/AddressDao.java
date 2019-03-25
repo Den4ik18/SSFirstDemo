@@ -80,12 +80,10 @@ public class AddressDao implements Dao<Address> {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String street = resultSet.getString(STREET);
-                String city = resultSet.getString(CITY);
-                int zipCode = resultSet.getInt(ZIP_CODE);
-                address.setStreet(street);
-                address.setZipCode(zipCode);
-                address.setCity(city);
+                address.setStreet(resultSet.getString(STREET));
+                address.setZipCode(resultSet.getInt(ZIP_CODE));
+                address.setCity(resultSet.getString(CITY));
+                address.setId(resultSet.getLong(ADDRESS_ID));
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -97,7 +95,10 @@ public class AddressDao implements Dao<Address> {
     @Override
     public Address add(Address address) {
         try {
-            PreparedStatement preparedStatement = getPreparedStatement(address);
+            PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(INSERT_TO_ADDRESS);
+            preparedStatement.setString(1, address.getStreet());
+            preparedStatement.setString(2, address.getCity());
+            preparedStatement.setInt(3, address.getZipCode());
             preparedStatement.executeUpdate();
             logger.info("Address was address to database");
         } catch (SQLException e) {
@@ -139,14 +140,5 @@ public class AddressDao implements Dao<Address> {
         logger.info("Return id address what was updated by id: " + id);
         return address.getId();
     }
-
-    private PreparedStatement getPreparedStatement(Address address) throws SQLException {
-        PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(AddressDao.INSERT_TO_ADDRESS);
-        preparedStatement.setString(1, address.getStreet());
-        preparedStatement.setString(2, address.getCity());
-        preparedStatement.setInt(3, address.getZipCode());
-        return preparedStatement;
-    }
-
 
 }

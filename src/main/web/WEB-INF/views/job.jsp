@@ -38,7 +38,7 @@
                     <td>${job.startDate}</td>
                     <td>${job.endDate}</td>
                     <td>${job.position}</td>
-                    <td><a href="<c:url value='/edit-job-${job.id}' />" class="btn btn-success custom-width">Edit</a></td>
+                    <td><a href="<c:url value='/update-job?id=${job.id}' />" class="btn btn-success custom-width">Edit</a></td>
                     <td><button class="btn btn-danger custom-width" onClick = handleDelete(${job.id},"job")>Delete</button></td>
                 </tr>
             </c:forEach>

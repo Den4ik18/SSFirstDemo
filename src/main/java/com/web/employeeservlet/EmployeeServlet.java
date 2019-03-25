@@ -2,6 +2,7 @@ package com.web.employeeservlet;
 
 import com.database.service.EmployeeService;
 import com.model.Employee;
+import com.validation.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,7 +45,7 @@ public class EmployeeServlet extends HttpServlet {
         employee.setSex(request.getParameter("sex"));
         employee.setEmail(request.getParameter("email"));
         employee.setDateOfBirth(LocalDate.parse(request.getParameter("dateOfBirth")));
-       /* if (Validator.validate(employee)) {
+        /*if (Validator.validate(employee)) {
             service.add(employee);
             response.sendRedirect("/com_serve_main_war_exploded/employee");
         } else {

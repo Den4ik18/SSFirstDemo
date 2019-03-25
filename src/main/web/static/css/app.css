@@ -36,5 +36,30 @@ body, .form-control{
 .custom-width2 {
     width: 155px !important;
 }
+.button-main {
+    width: 300px;
+    margin-left: 250px;
+    margin-top: 500px;
+    background-color:#68d651;
+    border-radius:16px;
+    font-size:36px;
+    border:2px solid #20c931;
+    cursor:pointer;
+    color:#ffffff;
+    font-family: Arial, serif;
+    padding:12px 31px;
+    text-decoration:none;
+    overflow: hidden;
+    /*align-content: center;*/
+}
+.button-main:hover {
+    background-color:#8ced57;
+
+}
+.button-main:active {
+
+    position:relative;
+    top:1px;
+}
 
 

@@ -62,6 +62,7 @@
                 <input type="submit" value="Add" class="btn btn-primary btn-sm" />  or <a
                     href="<c:url value='address' />">Cancel</a>
         </div>
+        </div>
     </form>
 </div>
 </body>

@@ -11,14 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/address")
 public class AddressServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AddressServlet.class);
     private AddressService service = new AddressService();
-    private List<Address> addresses = new ArrayList<>();
+
+    public AddressServlet() {
+        super();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +34,7 @@ public class AddressServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Address address = new Address();
         address.setStreet(request.getParameter("street"));
         address.setCity(request.getParameter("city"));
@@ -41,8 +43,10 @@ public class AddressServlet extends HttpServlet {
         response.sendRedirect("/com_serve_main_war_exploded/address");
     }
 
+
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         service.remove(Long.parseLong(req.getParameter("id")));
     }
+
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Denys
@@ -8,12 +9,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Resume</title>
+    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 </head>
 <body>
-  <h1>Hello</h1>
-  <li><a href="employee">Employee</a></li>
-  <li><a href="job">Job</a></li>
-  <li><a href="address">Address</a></li>
+    <a align="center" href="employee" class="button-main">Employee</a>
+    <a align="center" href="job" class="button-main">Job</a>
+    <a align="center" href="address" class="button-main">Address</a>
+
 </body>
 </html>

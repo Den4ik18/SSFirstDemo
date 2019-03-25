@@ -36,7 +36,7 @@
                     <td>${address.street}</td>
                     <td>${address.city}</td>
                     <td>${address.zipCode}</td>
-                    <td><a href="<c:url value='/update-address?=id${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
+                    <td><a href="<c:url value='/update-address?id=${address.id}' />" class="btn btn-success custom-width">Edit</a></td>
                     <td><button class="btn btn-danger custom-width" onClick = handleDelete(${address.id},"address")>Delete</button></td>
                 </tr>
             </c:forEach>
