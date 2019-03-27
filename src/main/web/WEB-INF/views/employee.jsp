@@ -19,7 +19,7 @@
 <body>
 <div class="generic-container">
     <div class="panel panel-default">
-        <div class="panel-heading"><span class="lead">List of Employees </span></div>
+        <div class="panel-heading"><span class="lead">Employees</span></div>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -29,9 +29,8 @@
                 <th>Sex</th>
                 <th>Email</th>
                 <th>Date of birth</th>
-                <th>Address</th>
-                <th width="200"></th>
-                <th width="200"></th>
+                <%--<th width="200"></th>--%>
+                <%--<th width="200"></th>--%>
             </tr>
             </thead>
             <tbody>
@@ -43,8 +42,8 @@
                     <td>${employee.sex}</td>
                     <td>${employee.email}</td>
                     <td>${employee.dateOfBirth}</td>
-                    <td>${employee.address}</td>
                     <td><a href="<c:url value='/update-employee?id=${employee.id}' />" class="btn btn-success custom-width">Edit</a></td>
+                    <td><a href="<c:url value='/fullinfo-employee?id=${employee.id}' />" class="btn btn-success custom-width3">Get more info</a></td>
                     <td><button class="btn btn-danger custom-width" onClick = handleDelete(${employee.id},"employee")>Delete</button></td>
                 </tr>
             </c:forEach>

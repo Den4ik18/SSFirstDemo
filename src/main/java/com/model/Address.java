@@ -4,8 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
@@ -78,8 +76,9 @@ public class Address {
 
     @Override
     public String toString() {
-        return "{" + street + ", " + city + ", " + zipCode + "}";
+        return street + ", " + city + ", " + zipCode;
     }
+
 
     @Override
     public boolean equals(Object o) {

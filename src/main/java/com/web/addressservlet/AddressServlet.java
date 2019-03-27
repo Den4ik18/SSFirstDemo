@@ -21,6 +21,8 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/address")
 public class AddressServlet extends HttpServlet {
+    private static final String PATH = "/WEB-INF/views/";
+    private static final String REDIRECT = "/com_serve_main_war_exploded/";
     private static final Logger logger = LogManager.getLogger(AddressServlet.class);
     private AddressService service = new AddressService();
     private EmployeeDao dao = new EmployeeDao();
@@ -34,15 +36,15 @@ public class AddressServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("add") != null) {
-            request.getRequestDispatcher("/WEB-INF/views/addAddress.jsp").forward(request, response);
+            request.getRequestDispatcher(PATH + "addAddress.jsp").forward(request, response);
         } else {
             List<Address> address = service.getAll();
             for (Address a : address) {
                 employeeName.add(dao.getEmployeeNameByJobId(a.getId()));
             }
-            request.setAttribute("name",employeeName);
+            request.setAttribute("name", employeeName);
             request.setAttribute("address", address);
-            request.getRequestDispatcher("/WEB-INF/views/address.jsp").forward(request, response);
+            request.getRequestDispatcher(PATH + "address.jsp").forward(request, response);
         }
     }
 
@@ -53,7 +55,7 @@ public class AddressServlet extends HttpServlet {
         address.setCity(request.getParameter("city"));
         address.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
         service.add(address);
-        response.sendRedirect("/com_serve_main_war_exploded/address");
+        response.sendRedirect(REDIRECT + "address");
     }
 
 
@@ -61,6 +63,5 @@ public class AddressServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         service.remove(Long.parseLong(req.getParameter("id")));
     }
-
 
 }

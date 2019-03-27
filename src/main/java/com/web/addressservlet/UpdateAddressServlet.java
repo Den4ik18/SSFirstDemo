@@ -14,6 +14,8 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/update-address")
 public class UpdateAddressServlet extends HttpServlet {
+    private static final String PATH = "/WEB-INF/views/";
+    private static final String REDIRECT = "/com_serve_main_war_exploded/";
     private static final Logger logger = LogManager.getLogger(UpdateAddressServlet.class);
     private Long id;
     private AddressService service = new AddressService();
@@ -25,7 +27,7 @@ public class UpdateAddressServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("address", service.getById(Long.valueOf(request.getParameter("id"))));
-        request.getRequestDispatcher("/WEB-INF/views/updateAddress.jsp").forward(request, response);
+        request.getRequestDispatcher(PATH + "updateAddress.jsp").forward(request, response);
         id = Long.valueOf(request.getParameter("id"));
         //Address address = service.getById(id);
     }
@@ -39,6 +41,6 @@ public class UpdateAddressServlet extends HttpServlet {
         newAddress.setCity(request.getParameter("city"));
         newAddress.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
         service.update(newAddress, id);
-        response.sendRedirect("/com_serve_main_war_exploded/address");
+        response.sendRedirect(REDIRECT + "address");
     }
 }

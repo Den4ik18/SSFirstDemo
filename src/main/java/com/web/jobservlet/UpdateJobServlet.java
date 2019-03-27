@@ -15,6 +15,8 @@ import java.time.LocalDate;
 
 @WebServlet(urlPatterns = "/update-job")
 public class UpdateJobServlet extends HttpServlet {
+    private static final String PATH = "/WEB-INF/views/";
+    private static final String REDIRECT = "/com_serve_main_war_exploded/";
     private static final Logger logger = LogManager.getLogger(UpdateJobServlet.class);
     private Long id;
     private JobService service = new JobService();
@@ -26,7 +28,7 @@ public class UpdateJobServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("job", service.getById(Long.valueOf(request.getParameter("id"))));
-        request.getRequestDispatcher("/WEB-INF/views/updateJob.jsp").forward(request, response);
+        request.getRequestDispatcher(PATH + "updateJob.jsp").forward(request, response);
         id = Long.valueOf(request.getParameter("id"));
         //Job job = service.getById(id);
     }
@@ -41,6 +43,6 @@ public class UpdateJobServlet extends HttpServlet {
         newJob.setStartDate(LocalDate.parse(request.getParameter("startDate")));
         newJob.setPosition(request.getParameter("position"));
         service.update(newJob, id);
-        response.sendRedirect("/com_serve_main_war_exploded/job");
+        response.sendRedirect(REDIRECT + "job");
     }
 }

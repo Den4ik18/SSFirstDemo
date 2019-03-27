@@ -18,7 +18,11 @@ body, .form-control{
 }
 
 .generic-container {
-  position:fixed;
+    overflow: auto;
+    /*overflow: scroll;*/
+   /* overflow-x:auto;
+    overflow-y:auto;*/
+  position:absolute;
   width:98%;
   margin-left: 20px;
   margin-top: 20px;
@@ -32,6 +36,9 @@ body, .form-control{
 
 .custom-width {
     width: 80px !important;
+}
+.custom-width {
+    width: 120px !important;
 }
 .custom-width2 {
     width: 155px !important;

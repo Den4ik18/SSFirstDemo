@@ -23,7 +23,6 @@ import java.util.Objects;
 
 @XmlRootElement
 public class Employee {
-    @NotNull(message = "id must be not null")
     @PositiveOrZero(message = "id must be positive or zero")
     private Long id;
 
@@ -37,12 +36,10 @@ public class Employee {
     @Pattern(regexp = "^\\+?\\d{12}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}")
     private String phoneNumber;
 
-    //    @XmlElement(name = "lastName")
     @NotNull(message = "last name must be not null")
     @NotBlank(message = "last name can't be blank")
     private String lastName;
 
-    @NotNull(message = "address must be not null")
     private Address address;
 
     @NotNull(message = "sex must be not null")
@@ -50,12 +47,11 @@ public class Employee {
     private String sex;
 
     @NotNull(message = "email must be not null")
-    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+(com|ua|ru|org)$")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+(com|net|ua|ru|org)$")
     private String email;
 
     @NotNull(message = "date of birth must be not null")
     @Past(message = "date of birth must be in past")
-//    @Pattern(regexp = "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])*")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateOfBirth;

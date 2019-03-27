@@ -19,7 +19,7 @@
 <body>
 <div class="generic-container">
     <div class="panel panel-default">
-        <div class="panel-heading"><span class="lead">List of Address </span></div>
+        <div class="panel-heading"><span class="lead">Addresses</span></div>
         <table class="table table-hover">
             <thead>
             <tr>

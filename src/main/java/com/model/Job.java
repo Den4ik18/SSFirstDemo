@@ -101,7 +101,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return getCompanyName() + ", " + getStartDate() + ", " + getEndDate() + ", " + getPosition();
+        return companyName +", "+ startDate +", "+ endDate +", "+ position+"; ";
     }
 
     @Override

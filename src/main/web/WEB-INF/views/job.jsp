@@ -19,7 +19,7 @@
 <body>
 <div class="generic-container">
     <div class="panel panel-default">
-        <div class="panel-heading"><span class="lead">List of Jobs</span></div>
+        <div class="panel-heading"><span class="lead">Jobs</span></div>
         <table class="table table-hover">
             <thead>
             <tr>
