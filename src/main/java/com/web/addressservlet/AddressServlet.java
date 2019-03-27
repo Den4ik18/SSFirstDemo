@@ -26,7 +26,6 @@ public class AddressServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AddressServlet.class);
     private AddressService service = new AddressService();
     private EmployeeDao dao = new EmployeeDao();
-    private List<Employee> employeesList = new ArrayList<>();
     private List<String> employeeName = new ArrayList<>();
 
     public AddressServlet() {

@@ -11,6 +11,11 @@ body, .form-control{
 	float:right;
 	margin-right: 18px;
 }
+.floatLeft{
+    float:left;
+    position: center;
+    margin-left: 40%;
+}
 
 
 .has-error{

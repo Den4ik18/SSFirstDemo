@@ -47,7 +47,6 @@ public class AllInfoAboutEmployeeServlet extends HttpServlet {
         response.addHeader("Content-Disposition", "inline; filename=" + "employee.pdf");
         ServletOutputStream out = response.getOutputStream();
         ByteArrayOutputStream baos = GeneratePdf.getPdfFile(employee);
-        System.out.println(employee);
         baos.writeTo(out);
     }
 }

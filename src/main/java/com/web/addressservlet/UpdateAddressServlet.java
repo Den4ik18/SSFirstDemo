@@ -29,7 +29,6 @@ public class UpdateAddressServlet extends HttpServlet {
         request.setAttribute("address", service.getById(Long.valueOf(request.getParameter("id"))));
         request.getRequestDispatcher(PATH + "updateAddress.jsp").forward(request, response);
         id = Long.valueOf(request.getParameter("id"));
-        //Address address = service.getById(id);
     }
 
     @Override

@@ -27,7 +27,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="name">First Name</label>
                 <div class="col-md-7">
-                    <input type="text" path="name"  id="name" name="name" value="${employee.name}"
+                    <input type="text" path="name"  id="name" disabled name="name" value="${employee.name}"
                            placeholder="${employee.name}" class="form-control input-sm"/>
                     <div class="has-error">
                         <errors path="name" class="help-inline"></errors>
@@ -40,7 +40,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Last Name</label>
                 <div class="col-md-7">
-                    <input type="text" path="lastName"  id="lastName" name="lastName"
+                    <input type="text" path="lastName"  id="lastName" disabled name="lastName"
                            value="${employee.lastName}" placeholder="${employee.lastName}"
                            class="form-control input-sm"/>
                     <div class="has-error">
@@ -54,7 +54,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="phoneNumber">Phone number</label>
                 <div class="col-md-7">
-                    <input type="text" path="phoneNumber" id="phoneNumber" name="phoneNumber"
+                    <input type="text" path="phoneNumber" id="phoneNumber" disabled name="phoneNumber"
                            value="${employee.phoneNumber}" placeholder="${employee.phoneNumber}"
                            class="form-control input-sm"/>
                     <div class="has-error">
@@ -68,7 +68,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="sex">Sex</label>
                 <div class="col-md-7">
-                    <input type="text" path="sex"  id="sex" name="sex" value="${employee.sex}"
+                    <input type="text" path="sex"  id="sex" disabled name="sex" value="${employee.sex}"
                            placeholder="${employee.sex}" class="form-control input-sm"/>
                     <div class="has-error">
                         <errors path="sex" class="help-inline"></errors>
@@ -81,7 +81,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="email">Email</label>
                 <div class="col-md-7">
-                    <input type="email" path="email"  id="email" name="email" value="${employee.email}"
+                    <input type="email" path="email"  id="email" disabled name="email" value="${employee.email}"
                            placeholder="${employee.email}" class="form-control input-sm"/>
                     <div class="has-error">
                         <errors path="email" class="help-inline"></errors>
@@ -94,7 +94,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="dateOfBirth">Date of Birth</label>
                 <div class="col-md-7">
-                    <input type="date" path="dateOfBirth"  id="dateOfBirth" name="dateOfBirth"
+                    <input type="date" path="dateOfBirth"  id="dateOfBirth" disabled name="dateOfBirth"
                            value="${employee.dateOfBirth}" placeholder="${employee.dateOfBirth}"
                            class="form-control input-sm"/>
                     <div class="has-error">
@@ -107,8 +107,8 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="address">Address</label>
                 <div class="col-md-7">
-                    <input type="text" path="address"  id="address" name="address" value="${employee.address}"
-                           placeholder="${employee.address}" class="form-control input-sm"/>
+                    <input type="text" path="address"  id="address" disabled name="address" required value="${employee.address}"
+                            class="form-control input-sm"/>
                     <div class="has-error">
                         <errors path="address" class="help-inline"></errors>
                     </div>
@@ -121,7 +121,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="companyName">Company name</label>
                     <div class="col-md-7">
-                        <input type="text" path="companyName"  id="companyName" name="companyName"
+                        <input type="text" path="companyName"  id="companyName" disabled name="companyName"
                                value="${job.getCompanyName()}" placeholder="${job.getCompanyName()}"
                                class="form-control input-sm"/>
                     </div>
@@ -131,7 +131,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="startDate">Start date</label>
                     <div class="col-md-7">
-                        <input type="text" path="startDate"  id="startDate" name="startDate"
+                        <input type="text" path="startDate"  id="startDate" disabled name="startDate"
                                value="${job.getStartDate()}" placeholder="${job.getStartDate()}"
                                class="form-control input-sm"/>
                     </div>
@@ -141,7 +141,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="endDate">End date</label>
                     <div class="col-md-7">
-                        <input type="text" path="endDate"  id="endDate" name="endDate"
+                        <input type="text" path="endDate"  id="endDate" disabled name="endDate"
                                value="${job.getEndDate()}" placeholder="${job.getEndDate()}"
                                class="form-control input-sm"/>
                     </div>
@@ -151,7 +151,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="endDate">Position</label>
                     <div class="col-md-7">
-                        <input type="text" path="position"  id="position" name="position"
+                        <input type="text" path="position"  id="position" disabled name="position"
                                value="${job.getPosition()}" placeholder="${job.getPosition()}"
                                class="form-control input-sm"/>
                     </div>
@@ -161,9 +161,12 @@
         </c:forEach>
 
         <div class="row">
+            <div class="form-actions floatLeft">
+                <input type="submit" value="Convert tp pdf" class="btn btn-success custom-width"/> or <a
+                    href="<c:url value='employee' />" class="btn btn-success custom-width">Convert to Yaml</a>
+            </div>
             <div class="form-actions floatRight">
-                <input type="submit" value="Get Pdf" class="btn btn-primary btn-sm"/> or <a
-                    href="<c:url value='employee' />">Cancel</a>
+                <a href="<c:url value='employee' />" class="btn btn-success custom-width">Go Back</a>
             </div>
         </div>
     </form>

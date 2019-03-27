@@ -30,7 +30,6 @@ public class UpdateJobServlet extends HttpServlet {
         request.setAttribute("job", service.getById(Long.valueOf(request.getParameter("id"))));
         request.getRequestDispatcher(PATH + "updateJob.jsp").forward(request, response);
         id = Long.valueOf(request.getParameter("id"));
-        //Job job = service.getById(id);
     }
 
     @Override

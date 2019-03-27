@@ -37,7 +37,6 @@ public class JobServlet extends HttpServlet {
             List<Job> jobs = service.getAll();
             for (Job j : jobs) {
                 employeeName.add(dao.getEmployeeNameByJobId(j.getId()));
-                System.out.println(dao.getEmployeeNameByJobId(j.getId()));
             }
             request.setAttribute("name", employeeName);
             request.setAttribute("jobs", jobs);
