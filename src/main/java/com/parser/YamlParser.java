@@ -34,6 +34,16 @@ public class YamlParser {
         logger.info("Employee wasn't written to file");
         return null;
     }
+    public static void exportObjectToYaml(File file, Employee employees) {
+        ObjectMapper mapper = new ObjectMapper(new YAMLMapper().getFactory());
+        try {
+            mapper.writeValue(file, employees);
+            logger.info("Employees was written to file");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        logger.info("Employee wasn't written to file");
+    }
 
 
 }

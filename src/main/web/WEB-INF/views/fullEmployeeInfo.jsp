@@ -21,7 +21,7 @@
 <div class="generic-container">
     <jsp:useBean id="employee" scope="request" type="com.model.Employee"/>
     <div class="well lead">All info about employee</div>
-    <form method="post" action="${pageContext.request.contextPath}/fullinfo-employee" class="form-horizontal">
+    <form method="post" action="${pageContext.request.contextPath}/fullinfo-employee?action=submit" class="form-horizontal">
         <input type="hidden" path="id" id="id"/>
         <div class="row">
             <div class="form-group col-md-12">
@@ -162,8 +162,9 @@
 
         <div class="row">
             <div class="form-actions floatLeft">
-                <input type="submit" value="Convert tp pdf" class="btn btn-success custom-width"/> or <a
-                    href="<c:url value='employee' />" class="btn btn-success custom-width">Convert to Yaml</a>
+                <input type="submit" value="Convert tp pdf" class="btn btn-success custom-width"/> or
+                <a href="${pageContext.request.contextPath}/employee?yaml=1" class="btn btn-success custom-width">Convert to Yaml</a>
+               <%--<button onclick="" class="btn btn-success custom-width">Convert to Yaml</button>--%>
             </div>
             <div class="form-actions floatRight">
                 <a href="<c:url value='employee' />" class="btn btn-success custom-width">Go Back</a>

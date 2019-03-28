@@ -26,7 +26,7 @@
                 <th>Street</th>
                 <th>City</th>
                 <th>Zip code</th>
-                <<th>Employee name</th>
+                <th>Employee name</th>
                 <th width="200"></th>
                 <th width="200"></th>
             </tr>

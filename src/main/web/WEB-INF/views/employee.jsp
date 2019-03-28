@@ -29,8 +29,6 @@
                 <th>Sex</th>
                 <th>Email</th>
                 <th>Date of birth</th>
-                <%--<th width="200"></th>--%>
-                <%--<th width="200"></th>--%>
             </tr>
             </thead>
             <tbody>
@@ -42,16 +40,23 @@
                     <td>${employee.sex}</td>
                     <td>${employee.email}</td>
                     <td>${employee.dateOfBirth}</td>
-                    <td><a href="<c:url value='/update-employee?id=${employee.id}' />" class="btn btn-success custom-width">Edit</a></td>
-                    <td><a href="<c:url value='/fullinfo-employee?id=${employee.id}' />" class="btn btn-success custom-width3">Get more info</a></td>
-                    <td><button class="btn btn-danger custom-width" onClick = handleDelete(${employee.id},"employee")>Delete</button></td>
+                    <td><a href="<c:url value='/modifyEmployee?id=${employee.id}' />"
+                           class="btn btn-success custom-width">Edit</a></td>
+                    <td><a href="<c:url value='/fullinfo-employee?id=${employee.id}' />"
+                           class="btn btn-success custom-width3">Get more info</a></td>
+                    <td>
+                        <button class="btn btn-danger custom-width" onClick=handleDelete(${employee.id},"employee")>
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="well">
-        <a href="${pageContext.request.contextPath}/employee?add=1" class="btn btn-success custom-width2">Add New Employee</a>
+        <a href="${pageContext.request.contextPath}/modifyEmployee" class="btn btn-success custom-width2">Add New
+            Employee</a>
     </div>
     <a href="${pageContext.request.contextPath}/">Go back</a>
 </div>

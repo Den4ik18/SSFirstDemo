@@ -39,7 +39,7 @@ public class AddressServlet extends HttpServlet {
         } else {
             List<Address> address = service.getAll();
             for (Address a : address) {
-                employeeName.add(dao.getEmployeeNameByJobId(a.getId()));
+                employeeName.add(dao.getEmployeeNameByAddressId(a.getId()));
             }
             request.setAttribute("name", employeeName);
             request.setAttribute("address", address);
@@ -56,7 +56,6 @@ public class AddressServlet extends HttpServlet {
         service.add(address);
         response.sendRedirect(REDIRECT + "address");
     }
-
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
