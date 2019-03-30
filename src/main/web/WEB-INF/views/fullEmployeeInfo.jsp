@@ -149,7 +149,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3 control-lable" for="endDate">Position</label>
+                    <label class="col-md-3 control-lable" for="position">Position</label>
                     <div class="col-md-7">
                         <input type="text" path="position"  id="position" disabled name="position"
                                value="${job.getPosition()}" placeholder="${job.getPosition()}"
@@ -163,8 +163,8 @@
         <div class="row">
             <div class="form-actions floatLeft">
                 <input type="submit" value="Convert tp pdf" class="btn btn-success custom-width"/> or
-                <a href="${pageContext.request.contextPath}/employee?yaml=1" class="btn btn-success custom-width">Convert to Yaml</a>
-               <%--<button onclick="" class="btn btn-success custom-width">Convert to Yaml</button>--%>
+                <a href="<c:url value='/convertToYaml?id=${employee.id}' />"
+                   class="btn btn-success custom-width">Convert to Yaml</a>
             </div>
             <div class="form-actions floatRight">
                 <a href="<c:url value='employee' />" class="btn btn-success custom-width">Go Back</a>

@@ -61,7 +61,7 @@
         <a href="${pageContext.request.contextPath}/address?add=1" class="btn btn-success custom-width2">Add New
             Address</a>
     </div>
-    <a href="${pageContext.request.contextPath}/">Go back</a>
+    <a href="${pageContext.request.contextPath}/main">Go back</a>
 </div>
 </body>
 </html>

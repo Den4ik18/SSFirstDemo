@@ -1,4 +1,4 @@
-package com.web.employeeservlet;
+package com.util;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -10,8 +10,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class GeneratePdf {
-    static ByteArrayOutputStream getPdfFile(Employee employee) {
+public class GeneratePdf {
+    public static ByteArrayOutputStream getPdfFile(Employee employee) {
         Document document = new Document();
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
 

@@ -40,7 +40,7 @@
                     <td>${employee.sex}</td>
                     <td>${employee.email}</td>
                     <td>${employee.dateOfBirth}</td>
-                    <td><a href="<c:url value='/modifyEmployee?id=${employee.id}' />"
+                    <td><a href="<c:url value='/update-employee?id=${employee.id}' />"
                            class="btn btn-success custom-width">Edit</a></td>
                     <td><a href="<c:url value='/fullinfo-employee?id=${employee.id}' />"
                            class="btn btn-success custom-width3">Get more info</a></td>
@@ -58,7 +58,7 @@
         <a href="${pageContext.request.contextPath}/modifyEmployee" class="btn btn-success custom-width2">Add New
             Employee</a>
     </div>
-    <a href="${pageContext.request.contextPath}/">Go back</a>
+    <a href="${pageContext.request.contextPath}/main">Go back</a>
 </div>
 </body>
 </html>

@@ -19,8 +19,6 @@ import java.util.Locale;
 import java.util.Objects;
 
 
-
-
 @XmlRootElement
 public class Employee {
     @PositiveOrZero(message = "id must be positive or zero")

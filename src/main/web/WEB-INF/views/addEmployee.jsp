@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="<c:url value='/static/js/scriptForAddJob.js' />" rel="stylesheet"></script>
     <script src="<c:url value='/static/js/scriptForAddAddress.js' />" rel="stylesheet"></script>
+    <script src="<c:url value='/static/js/checkOnEmpty.js' />" rel="stylesheet"></script>
 </head>
 <body>
 
@@ -124,5 +125,25 @@
         </div>
     </form>
 </div>
+<script>
+    $(document).ready(function(){
+        let checkField;
+        checkField = $("#dateOfBirth").val().length;
+
+        let enableDisableButton = function(){
+            if(checkField > 0){
+                $('#submit').removeAttr("disabled");
+            }
+            else {
+                $('#submit').prop("disabled","disabled");
+            }
+        };
+        enableDisableButton();
+        $('input#dateOfBirth').keyup(function(){
+            checkField = $("input#dateOfBirth").val().length;
+            enableDisableButton();
+        });
+    });
+</script>
 </body>
 </html>

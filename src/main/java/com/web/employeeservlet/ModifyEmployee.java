@@ -80,11 +80,7 @@ public class ModifyEmployee extends HttpServlet {
             }
         }
         if (Validator.validate(employee)) {
-            if (employee.getId() != 0) {
-                employeeService.update(employee, employee.getId());
-            } else {
-                employeeService.add(employee);
-            }
+            employeeService.add(employee);
             List<Employee> all = employeeService.getAll();
             all.sort(Comparator.comparing(Employee::getId).reversed());
             for (Job place : employee.getJobs()) {
