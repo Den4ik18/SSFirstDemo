@@ -20,14 +20,13 @@
     <a align="center" href="job" class="button-main">Job</a>
     <a align="center" href="address" class="button-main">Address</a>
 </div>
-<%--<div class="details">
+<div class="details">
     <label class="txt"> Upload cv: </label><br>
-    <form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
-        <input class="button" name="data" type="file" accept=".json, .xml, .txt" ><br><br>
-        <input class="button" type="submit" value="Send"> <br>
-        <label>${message}</label>
+    <form action="${pageContext.request.contextPath}/uploadFile" method="post" enctype="multipart/form-data">
+        <center><input class="btn btn-success custom-width4" name="data" type="file" value="Chose file" accept=".json, .xml, .txt" ></center>
+        <input class="btn btn-success custom-width" type="submit" value="Upload"> <br>
     </form>
-</div>--%>
+</div>
 </body>
 </html>
 

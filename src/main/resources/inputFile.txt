@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><employee><id>1</id><name>Dmytro</name><lastName>Havrulov</lastName><address><city>Chernivtsi</city><street>Holovna ,110</street><zipCode>58000</zipCode></address><jobs><id>1</id><companyName>SoftServe</companyName><startDate>2014-10-13</startDate><endDate>2015-10-13</endDate><position>junior</position></jobs><jobs><id>1</id><companyName>InventorSoft</companyName><startDate>2017-10-13</startDate><endDate>2018-10-13</endDate><position>junior</position></jobs><dateOfBirth>1990-10-05</dateOfBirth><phoneNumber>+38098443423</phoneNumber><sex>male</sex><email>dmutro12@mail.ru</email></employee>
-{"id":1,"name":"Denys","lastName":"Ohorodnik","phoneNumber":"+380973999060","dateOfBirth":"2010-10-10","sex":"male","jobs":[{"id":1,"companyName":"SoftServe","startDate":"2010-02-10","endDate":"2012-02-10","position":"junior"}],"address":{"street":"Nebesnoi Sotni ,4B","city":"Chernivtsi","zipCode":58000},"email":"den.ohorodnik@gmail.com"}
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><employee><name>Dmytro</name><lastName>Havrulov</lastName><address><city>Chernivtsi</city><street>Holovna ,110</street><zipCode>58000</zipCode></address><jobs><companyName>SoftServe</companyName><startDate>2014-10-13</startDate><endDate>2015-10-13</endDate><position>junior</position></jobs><jobs><companyName>InventorSoft</companyName><startDate>2017-10-13</startDate><endDate>2018-10-13</endDate><position>junior</position></jobs><dateOfBirth>1990-10-05</dateOfBirth><phoneNumber>+38098443423</phoneNumber><sex>male</sex><email>dmutro12@mail.ru</email></employee>
+{"name":"Denys","lastName":"Ohorodnik","phoneNumber":"+380973999060","dateOfBirth":"2010-10-10","sex":"male","jobs":[{"companyName":"SoftServe","startDate":"2010-02-10","endDate":"2012-02-10","position":"junior"}],"address":{"street":"Nebesnoi Sotni ,4B","city":"Chernivtsi","zipCode":58000},"email":"den.ohorodnik@gmail.com"}
 name: Petro
-id: 3
 lastName: Ivanov
-address: id - 1, city - Chernivtsi, street - Holovna 220, zipcode - 58000
-jobs: id - 1, companyName - InventorSort, startDate - 2016-04-10, endDate - 2017-09-13, position - junior
+address: city - Chernivtsi, street - Holovna 220, zipcode - 58000
+jobs: companyName - InventorSort, startDate - 2016-04-10, endDate - 2017-09-13, position - junior
 dateOfBirth - 1990-10-05
 phoneNumber: +38098443423
 sex: male
