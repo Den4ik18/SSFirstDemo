@@ -167,7 +167,7 @@
                    class="btn btn-success custom-width">Convert to Yaml</a>
             </div>
             <div class="form-actions floatRight">
-                <a href="<c:url value='employee' />" class="btn btn-success custom-width">Go Back</a>
+                <a href="<c:url value='employee' />" class="btn btn-danger custom-width">Go Back</a>
             </div>
         </div>
     </form>

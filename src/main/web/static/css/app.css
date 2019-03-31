@@ -22,9 +22,10 @@ body, .form-control{
 	color:red;
 }
 
+
 .generic-container {
-    overflow: auto;
-    /*overflow: scroll;*/
+    /*overflow: auto;*/
+    overflow: scroll;
    /* overflow-x:auto;
     overflow-y:auto;*/
   position:absolute;

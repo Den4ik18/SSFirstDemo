@@ -58,7 +58,7 @@
         <a href="${pageContext.request.contextPath}/modifyEmployee" class="btn btn-success custom-width2">Add New
             Employee</a>
     </div>
-    <a href="${pageContext.request.contextPath}/main">Go back</a>
+    <a href="${pageContext.request.contextPath}/main" class="btn btn-danger custom-width">Go back</a>
 </div>
 </body>
 </html>

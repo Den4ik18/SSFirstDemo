@@ -59,8 +59,8 @@
 
         <div class="row">
             <div class="form-actions floatRight">
-                <input type="submit" value="Add" class="btn btn-primary btn-sm" />  or <a
-                    href="<c:url value='address' />">Cancel</a>
+                <input type="submit" value="Add" class="btn btn-success custom-width" />  or <a
+                    href="<c:url value='address' />" class="btn btn-danger custom-width">Cancel</a>
         </div>
         </div>
     </form>
