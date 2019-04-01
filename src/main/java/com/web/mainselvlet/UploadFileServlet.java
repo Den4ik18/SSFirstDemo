@@ -28,7 +28,7 @@ import java.util.List;
         maxFileSize = 1024 * 1024 * 10,
         maxRequestSize = 1024 * 1024 * 50)
 public class UploadFileServlet extends HttpServlet {
-    private static final String SAVE_DIRECTORY = "P:\\Java Project\\JavaProject\\src\\main\\resources";
+    private static final String SAVE_DIRECTORY = "file";
     private static final String PATH = "/WEB-INF/views/";
     private static final String REDIRECT = "/com_serve_main_war_exploded/";
     private EmployeeService employeeService;
@@ -63,10 +63,11 @@ public class UploadFileServlet extends HttpServlet {
             appPath = appPath.replace('\\', '/');
             String fullSavePath;
             if (appPath.endsWith("/")) {
-                fullSavePath = SAVE_DIRECTORY;
+                fullSavePath = appPath+ SAVE_DIRECTORY;
             } else {
-                fullSavePath = "/" + SAVE_DIRECTORY;
+                fullSavePath = appPath+"/" + SAVE_DIRECTORY;
             }
+            System.out.println(fullSavePath);
             File fileSaveDir = new File(fullSavePath);
             if (!fileSaveDir.exists()) {
                 fileSaveDir.mkdir();
@@ -75,7 +76,6 @@ public class UploadFileServlet extends HttpServlet {
                 String fileName = extractFileName(part);
                 if (fileName != null && fileName.length() > 0) {
                     String filePath = fullSavePath + File.separator + fileName;
-                    System.out.println("Write attachment to file: " + filePath);
                     if (fileName.contains(".txt")) {
                         employees = parserService.searchEmployeeInSingleFile(new File(filePath));
                         for (Employee emp : employees) {

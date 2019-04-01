@@ -23,6 +23,10 @@ public class EmployeeDao implements Dao<Employee> {
     private static final String SELECT_ADDRESS = "SELECT street,city,zip_code FROM address WHERE employee_id = ?";
     private static final String SELECT_JOB = "SELECT company_name,start_date,end_date,position FROM job WHERE employee_id = ?";
     private static final String DELETE_BY_NAME = "DELETE FROM employee WHERE name=?";
+    private static final String SELECT_EMPLOYEE_NAME_FOR_ADDRESS = "SELECT em.name FROM employee AS em WHERE em.employee_id = " +
+            "(SELECT a.employee_id FROM address AS a WHERE a.address_id = ?)";
+    private static final String SELECT_EMPLOYEE_NAME_FOR_JOB = "SELECT em.name FROM employee AS em WHERE em.employee_id = " +
+            "(SELECT j.employee_id FROM job AS j WHERE j.job_id = ?)";
     private static final String EMPLOYEE_ID = "employee_id";
     private static final String NAME = "name";
     private static final String LAST_NAME = "last_name";
@@ -99,7 +103,7 @@ public class EmployeeDao implements Dao<Employee> {
         Employee employee = new Employee();
         try {
             Connection connection = MySqlConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(SELECT_WITH_CONDITION);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WITH_CONDITION);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -176,14 +180,13 @@ public class EmployeeDao implements Dao<Employee> {
         return employee.getId();
     }
 
-    public String getEmployeeNameByJobId(long id){
+    public String getEmployeeNameByJobId(long id) {
         String employeeName = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT em.name FROM employee AS em WHERE em.employee_id = " +
-                    "(SELECT j.employee_id FROM job AS j WHERE j.job_id = ?)");
-            preparedStatement.setLong(1,id);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EMPLOYEE_NAME_FOR_JOB);
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 employeeName = resultSet.getString("name");
             }
         } catch (SQLException e) {
@@ -191,14 +194,14 @@ public class EmployeeDao implements Dao<Employee> {
         }
         return employeeName;
     }
-    public String getEmployeeNameByAddressId(long id){
+
+    public String getEmployeeNameByAddressId(long id) {
         String employeeName = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT em.name FROM employee AS em WHERE em.employee_id = " +
-                    "(SELECT a.employee_id FROM address AS a WHERE a.address_id = ?)");
-            preparedStatement.setLong(1,id);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EMPLOYEE_NAME_FOR_ADDRESS);
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 employeeName = resultSet.getString("name");
             }
         } catch (SQLException e) {
