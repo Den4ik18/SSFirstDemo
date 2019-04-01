@@ -58,17 +58,17 @@ body, .form-control{
 .resumeTitle{
     font-size: 60px;
     text-align: center;
-    margin-top: 50px;
 }
 .details{
+    /*margin: 0 auto;*/
     text-align: center;
     font-size: 30px;
-    margin-top: 50px;
-    position: center;
+    margin-top: 500px;
+    position: relative;
 }
 .button-main {
+    margin-left: 180px;
     width: 300px;
-    margin-left: 240px;
     background-color:#68d651;
     border-radius:16px;
     font-size:36px;
@@ -91,7 +91,8 @@ body, .form-control{
     top:1px;
 }
 .bt1{
-    padding-top: 180px;
+    margin-left: 16%;
+    padding-top: 30px;
 }
 
 
