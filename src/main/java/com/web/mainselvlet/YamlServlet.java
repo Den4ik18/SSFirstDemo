@@ -2,16 +2,19 @@ package com.web.mainselvlet;
 
 import com.database.service.EmployeeService;
 import com.model.Employee;
+import org.apache.commons.io.IOUtils;
 
-import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import static com.parser.YamlParser.exportObjectToYaml;
+
 
 @WebServlet(urlPatterns = "/convertToYaml")
 public class YamlServlet extends HttpServlet {
@@ -26,12 +29,22 @@ public class YamlServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("employee", service.getById(Long.valueOf(request.getParameter("id"))));
         employee = service.getById(Long.valueOf((request.getParameter("id"))));
         request.setAttribute("jobs", employee.getJobs());
-        request.getRequestDispatcher(PATH + "fullEmployeeInfo.jsp").forward(request, response);
-        Long id = Long.valueOf(request.getParameter("id"));
-        exportObjectToYaml(new File("P:\\Java Project\\JavaProject\\src\\main\\resources\\employee.yml"), service.getById(id));
+
+        File dir = new File(getServletContext().getRealPath("/cv_files"));
+        dir.mkdirs();
+        File file = new File(dir.getAbsolutePath() + File.separator + employee.getName() + employee.getLastName() + ".yml");
+        exportObjectToYaml(new File(file.getAbsolutePath()), employee);
+        response.addHeader("Content-Disposition", "attachment;filename=" + file.getName());
+        ServletOutputStream out = response.getOutputStream();
+        FileInputStream stream = new FileInputStream(file);
+
+        IOUtils.copy(stream, out);
+        out.close();
+        file.deleteOnExit();
     }
+
 }

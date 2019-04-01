@@ -17,15 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 @WebServlet("/uploadFile")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 10MB
-        maxRequestSize = 1024 * 1024 * 50) // 50MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50)
 public class UploadFileServlet extends HttpServlet {
     private static final String SAVE_DIRECTORY = "P:\\Java Project\\JavaProject\\src\\main\\resources";
     private static final String PATH = "/WEB-INF/views/";
@@ -35,9 +36,7 @@ public class UploadFileServlet extends HttpServlet {
     private JobService jobService;
     private AddressService addressService;
 
-    public UploadFileServlet() {
-        super();
-    }
+
 
     @Override
     public void init(ServletConfig config) {
@@ -101,7 +100,7 @@ public class UploadFileServlet extends HttpServlet {
                 }
             }
             response.sendRedirect(REDIRECT + "employee");
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error: " + e.getMessage());
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PATH + "main.jsp");

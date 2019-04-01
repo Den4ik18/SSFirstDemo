@@ -1,19 +1,19 @@
 ---
-id: 8
-name: "Dima"
-phoneNumber: "+380983352213"
-lastName: "Tokar"
+id: 52
+name: "Denys"
+phoneNumber: "+380973999060"
+lastName: "Ohorodnik"
 address:
   id: null
-  street: "Prospect, 30"
-  city: "Ternopil"
-  zipCode: 53000
+  street: "Nebesnoi Sotni ,4B"
+  city: "Chernivtsi"
+  zipCode: 58000
 sex: "male"
-email: "d.tokar@gmail.com"
-dateOfBirth: "2002-10-10"
+email: "den.ohorodnik@gmail.com"
+dateOfBirth: "2010-10-10"
 jobs:
 - id: null
-  companyName: "ValSoft"
-  startDate: "2009-03-05"
-  endDate: "2010-10-03"
+  companyName: "SoftServe"
+  startDate: "2010-02-10"
+  endDate: "2012-02-10"
   position: "junior"

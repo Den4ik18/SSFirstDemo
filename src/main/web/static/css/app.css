@@ -49,9 +49,11 @@ body, .form-control{
 .custom-width2 {
     width: 155px !important;
 }
-.custom-width2 {
-    width: 210px !important;
+.custom-width4 {
+    width: 270px !important;
     position: center;
+    text-align: center;
+    margin: 0 auto;
 }
 .resumeTitle{
     font-size: 60px;
@@ -59,8 +61,8 @@ body, .form-control{
     margin-top: 50px;
 }
 .details{
-    font-size: 30px;
     text-align: center;
+    font-size: 30px;
     margin-top: 50px;
     position: center;
 }

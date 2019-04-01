@@ -23,7 +23,7 @@
 <div class="details">
     <label class="txt"> Upload cv: </label><br>
     <form action="${pageContext.request.contextPath}/uploadFile" method="post" enctype="multipart/form-data">
-        <center><input class="btn btn-success custom-width4" name="data" type="file" value="Chose file" accept=".json, .xml, .txt" ></center>
+        <input class="btn btn-success custom-width4" name="data" type="file" value="Chose file" accept=".json, .xml, .txt" >
         <input class="btn btn-success custom-width" type="submit" value="Upload"> <br>
     </form>
 </div>
